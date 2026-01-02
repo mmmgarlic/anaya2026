@@ -6,8 +6,24 @@
   font-display: swap;
 }
 
+/* Define CSS variables used across the stylesheet */
+:root {
+  --blue: #2A00FF;
+  --white: #FFFFFF;
+}
+
 body {
   font-family: "OfficeTimesRoundMono", monospace;
+  background-color: var(--white);
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Container with custom scrollbar */
@@ -20,14 +36,13 @@ body {
   scroll-behavior: smooth;
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: #2A00FF transparent;
+  scrollbar-color: var(--blue) transparent;
   padding-right: 4px;
 }
 
 /* Custom scrollbar */
 .container::-webkit-scrollbar {
   width: 6px;
-  z-index: 99999;
   position: relative;
 }
 
