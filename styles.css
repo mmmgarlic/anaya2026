@@ -1,31 +1,3 @@
-/* Self-hosted font */
-@font-face {
-  font-family: "OfficeTimesRoundMono";
-  src: url("./fonts/OfficeTimesRoundMono.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* CSS Variables */
-:root {
-  --blue: #2A00FF;
-  --white: #FFFFFF;
-}
-
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "OfficeTimesRoundMono", monospace;
-  background-color: var(--white);
-  overflow: hidden;
-}
-
 /* Container with custom scrollbar */
 .container {
   height: 100vh;
@@ -34,24 +6,32 @@ body {
   overflow-x: hidden;
   background-color: var(--white);
   scroll-behavior: smooth;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: #2A00FF transparent;
+  padding-right: 4px;
 }
 
 /* Custom scrollbar */
 .container::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
+  z-index: 99999;
+  position: relative;
 }
 
 .container::-webkit-scrollbar-track {
-  background: rgba(42, 0, 255, 0.1);
+  background: transparent;
+  margin: 4px;
 }
 
 .container::-webkit-scrollbar-thumb {
   background: var(--blue);
-  border-radius: 5px;
+  border-radius: 3px;
+  margin-right: 2px;
 }
 
 .container::-webkit-scrollbar-thumb:hover {
-  background: rgba(42, 0, 255, 0.8);
+  background: #1a0099;
 }
 
 /* Clover */
@@ -170,9 +150,9 @@ body {
   padding: 0;
   color: var(--white);
   font-size: 24px;
-  font-family: "OfficeTimesRoundMono", monospace;
+  font-family: 'IBM Plex Mono', monospace;
   text-decoration: underline;
-  transition: opacity 0.3s ease, text-decoration 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .work-button:hover {
@@ -234,6 +214,7 @@ body {
 /* Scrolling Text */
 .scrolling-text-container {
   margin-bottom: 16px;
+  width: 880px;
   max-width: 90vw;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -295,7 +276,7 @@ body {
   width: 100%;
   height: 2px;
   background-color: var(--blue);
-  opacity: 0.001;
+  opacity: 0;
   margin-bottom: 20px;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
@@ -304,7 +285,7 @@ body {
 .projects-list {
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
               transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  opacity: 0.001;
+  opacity: 0;
 }
 
 .project-card {
@@ -444,9 +425,7 @@ body {
 
   .work-button {
     font-size: 18px;
-    transition: opacity 0.3s ease, text-decoration 0.3s ease;
-}
-
+  }
 
   .clover-logo {
     width: 60px;
