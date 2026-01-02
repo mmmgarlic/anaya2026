@@ -4,7 +4,69 @@ const WHITE = '#FFFFFF';
 
 // Projects data
 const projects = [
-  /* ... same project objects ... */
+  {
+    id: 1,
+    title: 'Lorem Ipsum Dolor',
+    year: '2025',
+    tags: ['Creative Code', 'Chatbot Creation', 'Web Design', 'Game Design'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 2,
+    title: 'Consectetur Adipiscing',
+    year: '2025',
+    tags: ['Interactive', 'Generative Art', 'Web Design'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 3,
+    title: 'Sed Do Eiusmod',
+    year: '2024',
+    tags: ['Music Production', 'Sound Design', 'Audio'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 4,
+    title: 'Tempor Incididunt',
+    year: '2024',
+    tags: ['UI/UX Design', 'Prototyping', 'Mobile'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 5,
+    title: 'Ut Labore Magna',
+    year: '2024',
+    tags: ['Animation', 'Motion Graphics', 'Video'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 6,
+    title: 'Aliqua Enim Minim',
+    year: '2023',
+    tags: ['Data Visualization', 'Creative Code', 'Interactive'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 7,
+    title: 'Veniam Quis Nostrud',
+    year: '2023',
+    tags: ['Web Development', 'Full Stack', 'API Design'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 8,
+    title: 'Exercitation Ullamco',
+    year: '2023',
+    tags: ['3D Design', 'Blender', 'Rendering'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  },
+  {
+    id: 9,
+    title: 'Laboris Nisi Aliquip',
+    year: '2023',
+    tags: ['Game Design', 'Unity', 'Interactive'],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  }
 ];
 
 // Scrolling text words
@@ -37,7 +99,7 @@ let scrollingTextOffset = 0;
 let scrollBoost = 0;
 let scrollingTextDirection = 1;
 
-// Get DOM elements (may be null if DOM not ready)
+// Get DOM elements
 const container = document.getElementById('container');
 const clover = document.getElementById('clover');
 const cloverLeaves = document.getElementById('cloverLeaves');
@@ -55,20 +117,12 @@ const bottomGradient = document.getElementById('bottomGradient');
 const cloverPlaceholder = document.getElementById('cloverPlaceholder');
 const navigationContent = document.getElementById('navigationContent');
 
-// Respect reduced motion preference
-const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
 // Initialize
 function init() {
-  if (!container) {
-    console.warn('container element not found - aborting init');
-    return;
-  }
-
   // Set up scrolling text
   const text = scrollingWords.join('  ✦  ');
   const fullText = `${text}  ✦  ${text}  ✦  ${text}  ✦  ${text}`;
-  if (scrollingText) scrollingText.textContent = fullText;
+  scrollingText.textContent = fullText;
 
   // Render projects
   renderProjects();
@@ -76,24 +130,17 @@ function init() {
   // Update viewport dimensions
   updateViewportDimensions();
 
-  // Start animation loops (unless user prefers reduced motion)
-  if (!prefersReducedMotion) {
-    if (cloverLeaves) requestAnimationFrame(animateClover);
-    requestAnimationFrame(animateScrollingText);
-  } else {
-    // If reduced motion, make sure scroll text and clover are in stable positions
-    if (cloverLeaves) cloverLeaves.style.transform = `translate(-50%, -50%) rotate(0deg)`;
-    if (scrollingText) scrollingText.style.transform = `translateX(0)`;
-  }
+  // Start animation loops
+  requestAnimationFrame(animateClover);
+  requestAnimationFrame(animateScrollingText);
 
   // Event listeners
   window.addEventListener('resize', updateViewportDimensions);
-  // Use passive listeners for wheel events (we don't preventDefault)
-  window.addEventListener('wheel', handleWheel, { passive: true });
+  window.addEventListener('wheel', handleWheel);
   container.addEventListener('scroll', handleScroll);
   window.addEventListener('mousemove', handleMouseMove);
-  clover && clover.addEventListener('click', () => window.location.reload());
-  workButton && workButton.addEventListener('click', scrollToWork);
+  clover.addEventListener('click', () => window.location.reload());
+  workButton.addEventListener('click', scrollToWork);
 
   // Mouse activity tracking
   let mouseTimeout;
@@ -105,29 +152,16 @@ function init() {
     }, 150);
   });
 
-  // Use ResizeObserver to track heroContent size changes and update measurements
-  if (window.ResizeObserver && heroContent) {
-    const ro = new ResizeObserver(() => {
-      updateViewportDimensions();
-      // update scrolling container width to stay flush with hero content
-      if (heroContent && scrollingTextContainer) {
-        scrollingTextContainer.style.width = `${heroContent.offsetWidth}px`;
-      }
-    });
-    ro.observe(heroContent);
-  }
-
   // Initial update
   updateLayout();
 }
 
 // Render projects
 function renderProjects() {
-  if (!projectsList) return;
   projectsList.innerHTML = projects.map((project, index) => `
     <div>
       <div class="project-card">
-        <div class="project-image" aria-hidden="true"></div>
+        <div class="project-image"></div>
         <div class="project-content">
           <div class="project-header">
             <div class="project-tags">
@@ -167,7 +201,6 @@ function handleWheel(e) {
 let scrollTimeout;
 function handleScroll() {
   if (isAutoScrolling) return;
-  if (!container) return;
   
   const scrollPosition = container.scrollTop;
 
@@ -218,18 +251,14 @@ function handleMouseMove() {
 function scrollToWork() {
   scrollProgress = 1;
   setTimeout(() => {
-    if (workSection) {
-      workSection.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
+    workSection.scrollIntoView({
+      behavior: 'smooth'
+    });
   }, 50);
 }
 
 // Animate clover rotation
 function animateClover() {
-  if (!cloverLeaves) return;
-
   // Smoothly decay boost
   spinBoost *= 0.92;
 
@@ -257,16 +286,10 @@ window.addEventListener('wheel', (e) => {
   spinDirectionTimeout = setTimeout(() => {
     currentDirection = 1;
   }, 150);
-}, { passive: true });
+});
 
 // Animate scrolling text
 function animateScrollingText() {
-  if (!scrollingText) {
-    // Retry on next frame in case it becomes available
-    requestAnimationFrame(animateScrollingText);
-    return;
-  }
-
   // Decay the scroll boost
   scrollBoost *= 0.95;
 
@@ -279,8 +302,8 @@ function animateScrollingText() {
 
   scrollingTextOffset += currentSpeed;
 
-  // Use actual scrollWidth for correct looping behavior
-  const textWidth = scrollingText.scrollWidth || 2000;
+  // Normalize offset for looping
+  const textWidth = 2000;
   const normalizedOffset = ((scrollingTextOffset % textWidth) + textWidth) % textWidth;
 
   // Apply transform
@@ -301,7 +324,7 @@ window.addEventListener('wheel', (e) => {
   scrollTextDirectionTimeout = setTimeout(() => {
     scrollingTextDirection = 1;
   }, 150);
-}, { passive: true });
+});
 
 // Update layout based on scroll progress
 function updateLayout() {
@@ -364,57 +387,43 @@ function updateLayout() {
   const headerGradientOpacity = Math.min(0.95, scrollProgress * 3);
   const bottomGradientOpacity = Math.max(0, 1 - scrollProgress * 2.5);
 
-  // Apply styles (guarded)
-  if (clover) {
-    clover.style.top = `${cloverY}px`;
-    clover.style.left = `${cloverX}px`;
-    clover.style.transform = `translate(-50%, -50%) scale(${finalCloverScale})`;
-  }
+  // Apply styles
+  clover.style.top = `${cloverY}px`;
+  clover.style.left = `${cloverX}px`;
+  clover.style.transform = `translate(-50%, -50%) scale(${finalCloverScale})`;
 
-  if (mainTitle) {
-    mainTitle.style.opacity = titleOpacity;
-    mainTitle.style.transform = `scale(${titleScale})`;
-  }
+  mainTitle.style.opacity = titleOpacity;
+  mainTitle.style.transform = `scale(${titleScale})`;
 
-  if (scrollingTextContainer) {
-    scrollingTextContainer.style.opacity = scrollingTextOpacity;
-    scrollingTextContainer.style.transform = `translateY(${scrollingTextTranslateY}px)`;
-  }
+  scrollingTextContainer.style.opacity = scrollingTextOpacity;
+  scrollingTextContainer.style.transform = `translateY(${scrollingTextTranslateY}px)`;
 
-  if (workButton) {
-    workButton.style.opacity = showWorkButton ? 1 : 0;
-    workButton.style.pointerEvents = showWorkButton ? 'auto' : 'none';
-  }
+  workButton.style.opacity = showWorkButton ? 1 : 0;
+  workButton.style.pointerEvents = showWorkButton ? 'auto' : 'none';
 
-  if (headerGradient) headerGradient.style.opacity = headerGradientOpacity;
-  if (bottomGradient) bottomGradient.style.opacity = bottomGradientOpacity;
+  headerGradient.style.opacity = headerGradientOpacity;
+  bottomGradient.style.opacity = bottomGradientOpacity;
 
-  if (topLine) {
-    topLine.style.opacity = workContentOpacity * 0.3;
-    topLine.style.transform = `translateY(${workContentTranslateY}px)`;
-  }
+  topLine.style.opacity = workContentOpacity * 0.3;
+  topLine.style.transform = `translateY(${workContentTranslateY}px)`;
 
-  if (projectsList) {
-    projectsList.style.opacity = workContentOpacity;
-    projectsList.style.transform = `translateY(${workContentTranslateY}px)`;
-  }
+  projectsList.style.opacity = workContentOpacity;
+  projectsList.style.transform = `translateY(${workContentTranslateY}px)`;
 
-  if (footer) footer.style.opacity = workContentOpacity;
+  footer.style.opacity = workContentOpacity;
 
   // Update scrolling text container width to match hero content
-  if (heroContent && scrollingTextContainer) {
+  if (heroContent) {
     scrollingTextContainer.style.width = `${heroContent.offsetWidth}px`;
   }
 
   // Update clover placeholder size for mobile
-  if (cloverPlaceholder) {
-    if (isMobile) {
-      cloverPlaceholder.style.width = '60px';
-      cloverPlaceholder.style.height = '60px';
-    } else {
-      cloverPlaceholder.style.width = '96px';
-      cloverPlaceholder.style.height = '96px';
-    }
+  if (isMobile) {
+    cloverPlaceholder.style.width = '60px';
+    cloverPlaceholder.style.height = '60px';
+  } else {
+    cloverPlaceholder.style.width = '96px';
+    cloverPlaceholder.style.height = '96px';
   }
 }
 
