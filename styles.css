@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "OfficeTimesRoundMono";
+  src: url("./fonts/OfficeTimesRoundMono.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Container with custom scrollbar */
 .container {
   height: 100vh;
