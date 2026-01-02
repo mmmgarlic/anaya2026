@@ -6,6 +6,10 @@
   font-display: swap;
 }
 
+body {
+  font-family: "OfficeTimesRoundMono", monospace;
+}
+
 /* Container with custom scrollbar */
 .container {
   height: 100vh;
