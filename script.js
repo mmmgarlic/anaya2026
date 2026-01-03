@@ -99,6 +99,31 @@ let scrollingTextOffset = 0;
 let scrollBoost = 0;
 let scrollingTextDirection = 1;
 
+// --- Direction reset helpers (prevents "stuck backwards" + avoids snap/turbo) ---
+let scrollTextDirectionTimeout;
+function scheduleScrollDirectionReset() {
+  clearTimeout(scrollTextDirectionTimeout);
+  scrollTextDirectionTimeout = setTimeout(() => {
+    if (scrollBoost < 0.8) {
+      scrollingTextDirection = 1;
+    } else {
+      scheduleScrollDirectionReset();
+    }
+  }, 200);
+}
+
+let spinDirectionTimeout;
+function scheduleSpinDirectionReset() {
+  clearTimeout(spinDirectionTimeout);
+  spinDirectionTimeout = setTimeout(() => {
+    if (spinBoost < 0.8) {
+      currentDirection = 1;
+    } else {
+      scheduleSpinDirectionReset();
+    }
+  }, 200);
+}
+
 // Get DOM elements
 const container = document.getElementById('container');
 const clover = document.getElementById('clover');
@@ -201,6 +226,10 @@ window.addEventListener('touchmove', (e) => {
   // Scrolling text boost
   scrollBoost = Math.min(30, velocity * 1.4);
   scrollingTextDirection = dir;
+
+  // NEW: after touch stops, drift back to default direction
+  scheduleScrollDirectionReset();
+  scheduleSpinDirectionReset();
 
   lastTouchY = y;
   lastTouchTime = now;
@@ -308,7 +337,8 @@ function handleScroll() {
     }
   }, 150);
 
-  updateLayout();
+ requestLayoutUpdate();
+
 }
 
 // Handle mouse movement
@@ -348,17 +378,14 @@ const baseSpeed = isMobile ? 0.75 : 0.3;
 }
 
 // Update spin boost when scrolling
-let spinDirectionTimeout;
 window.addEventListener('wheel', (e) => {
   const boost = Math.abs(e.deltaY) * 0.15;
   spinBoost = Math.min(boost, 12);
   currentDirection = e.deltaY > 0 ? 1 : -1;
 
-  clearTimeout(spinDirectionTimeout);
-  spinDirectionTimeout = setTimeout(() => {
-    currentDirection = 1;
-  }, 150);
-});
+  // return to default direction only when boost is calm
+  scheduleSpinDirectionReset();
+}, { passive: true });
 
 function animateScrollingText() {
   const isMobile = viewportWidth < 1024;
@@ -381,18 +408,18 @@ function animateScrollingText() {
 }
 
 // Update scrolling text boost when scrolling
-let scrollTextDirectionTimeout;
 window.addEventListener('wheel', (e) => {
   const isMobile = viewportWidth < 1024;
   const boost = Math.abs(e.deltaY) * (isMobile ? 0.2 : 0.3);
-  scrollBoost = Math.min(boost, isMobile ? 20 : 30);
+
+  // keep your cap, or set desktop to 12 if you want it calmer:
+  scrollBoost = Math.min(boost, isMobile ? 20 : 30); // or desktop: 12
+
   scrollingTextDirection = e.deltaY > 0 ? 1 : -1;
 
-  clearTimeout(scrollTextDirectionTimeout);
-  scrollTextDirectionTimeout = setTimeout(() => {
-    scrollingTextDirection = 1;
-  }, 150);
-});
+  // return to default direction only when boost is calm
+  scheduleScrollDirectionReset();
+}, { passive: true });
 
 // Update layout based on scroll progress
 function updateLayout() {
@@ -423,11 +450,12 @@ function updateLayout() {
       startX = textLeftEdge - (CLOVER_SIZE * baseCloverScale) / 2 - MIN_GAP;
     }
 
-    if (viewportWidth < 805) {
-      baseCloverScale *= 1.25;
-    } else if (viewportWidth < 1024) {
-      baseCloverScale *= 1.35;
-    }
+if (viewportWidth < 805) {
+  baseCloverScale *= 1.05;
+} else if (viewportWidth < 1024) {
+  baseCloverScale *= 1.10;
+}
+
   } else {
     if (viewportWidth < 805) {
       startX = viewportWidth * 0.15;
