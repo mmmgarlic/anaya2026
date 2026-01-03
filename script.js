@@ -117,12 +117,44 @@ const bottomGradient = document.getElementById('bottomGradient');
 const cloverPlaceholder = document.getElementById('cloverPlaceholder');
 const navigationContent = document.getElementById('navigationContent');
 
+function wrapSpecialChars(el) {
+  if (!el) return;
+
+  // Replace only text nodes inside el
+  const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null);
+  const textNodes = [];
+  while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+  // Define what counts as "special"
+  // This catches common symbols like ✦ ↓ ↑ • — etc (non A-Z, a-z, 0-9, basic punctuation)
+  const specialRegex = /([^\w\s✦.,'])/g;
+
+  textNodes.forEach(node => {
+    const text = node.nodeValue;
+    if (!specialRegex.test(text)) return;
+
+    const span = document.createElement('span');
+    span.innerHTML = text.replace(specialRegex, `<span class="special-char">$1</span>`);
+    node.parentNode.replaceChild(span, node);
+  });
+}
+
+let layoutRaf = null;
+function requestLayoutUpdate() {
+  if (layoutRaf) return;
+  layoutRaf = requestAnimationFrame(() => {
+    layoutRaf = null;
+    updateLayout();
+  });
+}
+
 // Initialize
 function init() {
   // Set up scrolling text
   const text = scrollingWords.join('  ✦  ');
   const fullText = `${text}  ✦  ${text}  ✦  ${text}  ✦  ${text}`;
   scrollingText.textContent = fullText;
+  wrapSpecialChars(document.body);
 
   // Render projects
   renderProjects();
@@ -136,11 +168,48 @@ function init() {
 
   // Event listeners
   window.addEventListener('resize', updateViewportDimensions);
-  window.addEventListener('wheel', handleWheel);
   container.addEventListener('scroll', handleScroll);
   window.addEventListener('mousemove', handleMouseMove);
   clover.addEventListener('click', () => window.location.reload());
   workButton.addEventListener('click', scrollToWork);
+
+  // --- Mobile: make scroll boost work on touch (no wheel on phones) ---
+let lastTouchY = null;
+let lastTouchTime = 0;
+
+window.addEventListener('touchstart', (e) => {
+  if (!e.touches || !e.touches[0]) return;
+  lastTouchY = e.touches[0].clientY;
+  lastTouchTime = performance.now();
+}, { passive: true });
+
+window.addEventListener('touchmove', (e) => {
+  if (!e.touches || !e.touches[0] || lastTouchY == null) return;
+
+  const y = e.touches[0].clientY;
+  const now = performance.now();
+  const dy = lastTouchY - y; // + = scrolling down
+  const dt = Math.max(1, now - lastTouchTime);
+
+  const dir = dy > 0 ? 1 : -1;
+  const velocity = Math.min(40, Math.abs(dy) * (16 / dt)); // roughly normalized
+
+  // Clover boost
+  spinBoost = Math.min(12, velocity * 0.9);
+  currentDirection = dir;
+
+  // Scrolling text boost
+  scrollBoost = Math.min(30, velocity * 1.4);
+  scrollingTextDirection = dir;
+
+  lastTouchY = y;
+  lastTouchTime = now;
+}, { passive: true });
+
+window.addEventListener('touchend', () => {
+  lastTouchY = null;
+}, { passive: true });
+
 
   // Mouse activity tracking
   let mouseTimeout;
@@ -153,7 +222,7 @@ function init() {
   });
 
   // Initial update
-  updateLayout();
+  requestLayoutUpdate();
 }
 
 // Render projects
@@ -188,7 +257,7 @@ function updateViewportDimensions() {
     heroTextRect = mainTitle.getBoundingClientRect();
   }
   
-  updateLayout();
+  requestLayoutUpdate();
 }
 
 // Handle wheel events
@@ -259,11 +328,14 @@ function scrollToWork() {
 
 // Animate clover rotation
 function animateClover() {
-  // Smoothly decay boost
-  spinBoost *= 0.92;
+const isMobile = viewportWidth < 1024;
 
-  // Always have base rotation (slow clockwise)
-  const baseSpeed = 0.3;
+// decay (mobile holds boost a bit longer)
+spinBoost *= isMobile ? 0.94 : 0.92;
+
+// base rotation (mobile faster)
+const baseSpeed = isMobile ? 0.75 : 0.3;
+
 
   // Rotate with base speed + scroll boost, TIMES direction
   const totalSpeed = (baseSpeed + spinBoost) * currentDirection;
@@ -288,27 +360,23 @@ window.addEventListener('wheel', (e) => {
   }, 150);
 });
 
-// Animate scrolling text
 function animateScrollingText() {
-  // Decay the scroll boost
-  scrollBoost *= 0.95;
-
-  // Check if mobile
   const isMobile = viewportWidth < 1024;
-  const baseSpeed = isMobile ? 0.5 : 0.8;
 
-  // Calculate current speed (base + boost) TIMES direction
+  scrollBoost *= isMobile ? 0.97 : 0.95;
+
+  // base speed
+  const baseSpeed = isMobile ? 1.3 : 0.8;
+
+  // current speed
   const currentSpeed = (baseSpeed + scrollBoost) * scrollingTextDirection;
-
   scrollingTextOffset += currentSpeed;
 
   // Normalize offset for looping
   const textWidth = 2000;
   const normalizedOffset = ((scrollingTextOffset % textWidth) + textWidth) % textWidth;
 
-  // Apply transform
   scrollingText.style.transform = `translateX(-${normalizedOffset}px)`;
-
   requestAnimationFrame(animateScrollingText);
 }
 
