@@ -373,7 +373,7 @@ function updateLayout() {
     }
   }
 
-  const startY = viewportHeight * 0.45.5;
+  const startY = viewportHeight * 0.47;
   const endY = 40;
   const endX = viewportWidth * 0.5;
 
