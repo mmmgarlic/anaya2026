@@ -109,7 +109,7 @@ function scheduleScrollDirectionReset() {
     } else {
       scheduleScrollDirectionReset();
     }
-  }, 200);
+  }, 160);
 }
 
 let spinDirectionTimeout;
@@ -121,7 +121,7 @@ function scheduleSpinDirectionReset() {
     } else {
       scheduleSpinDirectionReset();
     }
-  }, 200);
+  }, 160);
 }
 
 // Get DOM elements
@@ -390,7 +390,8 @@ window.addEventListener('wheel', (e) => {
 function animateScrollingText() {
   const isMobile = viewportWidth < 1024;
 
-  scrollBoost *= isMobile ? 0.97 : 0.95;
+scrollBoost *= isMobile ? 0.90 : 0.95;
+
 
   // base speed
   const baseSpeed = isMobile ? 1.3 : 0.8;
@@ -432,7 +433,7 @@ function updateLayout() {
   const scrollingTextTranslateY = scrollProgress * 80;
 
   // Clover positioning
-  const CLOVER_SIZE = isMobile ? 60 : 96;
+  const CLOVER_SIZE = isMobile ? 52 : 96;
   const MIN_GAP = isMobile ? 12 : 20;
 
   let startX;
@@ -498,10 +499,7 @@ if (heroTextRect) {
   const headerGradientOpacity = Math.min(0.95, scrollProgress * 3);
   const bottomGradientOpacity = Math.max(0, 1 - scrollProgress * 2.5);
 
-  // Apply styles
-  clover.style.top = `${cloverY}px`;
-  clover.style.left = `${cloverX}px`;
-  clover.style.transform = `translate(-50%, -50%) scale(${finalCloverScale})`;
+clover.style.transform = `translate3d(${cloverX}px, ${cloverY}px, 0) translate(-50%, -50%) scale(${finalCloverScale})`;
 
   mainTitle.style.opacity = titleOpacity;
   mainTitle.style.transform = `scale(${titleScale})`;
@@ -529,13 +527,13 @@ if (heroTextRect) {
   }
 
   // Update clover placeholder size for mobile
-  if (isMobile) {
-    cloverPlaceholder.style.width = '60px';
-    cloverPlaceholder.style.height = '60px';
-  } else {
-    cloverPlaceholder.style.width = '96px';
-    cloverPlaceholder.style.height = '96px';
-  }
+if (isMobile) {
+  cloverPlaceholder.style.width = '52px';
+  cloverPlaceholder.style.height = '52px';
+} else {
+  cloverPlaceholder.style.width = '96px';
+  cloverPlaceholder.style.height = '96px';
+}
 }
 
 // Initialize on DOM load
