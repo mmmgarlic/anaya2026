@@ -99,21 +99,6 @@ let scrollingTextOffset = 0;
 let scrollBoost = 0;
 let scrollingTextDirection = 1;
 
-// --- Fix iOS "one hitch" when returning to landing ---
-// While user is actively scrolling, disable clover CSS transition (iOS Safari stutter fix)
-let scrollingActiveTimeout;
-
-function setScrollingActive(active) {
-  const isMobile = viewportWidth < 1024;
-  if (!isMobile) return;
-
-  // When scrolling: no transition (JS is already animating smoothly)
-  // When stopped: restore your mobile transition
-  clover.style.transition = active
-    ? 'none'
-    : 'transform 0.30s cubic-bezier(0.4, 0, 0.2, 1)';
-}
-
 // --- Direction reset helpers (prevents "stuck backwards" + avoids snap/turbo) ---
 let scrollTextDirectionTimeout;
 function scheduleScrollDirectionReset() {
@@ -156,6 +141,19 @@ const footer = document.getElementById('footer');
 const bottomGradient = document.getElementById('bottomGradient');
 const cloverPlaceholder = document.getElementById('cloverPlaceholder');
 const navigationContent = document.getElementById('navigationContent');
+
+// --- Fix iOS "one hitch" when returning to landing ---
+// While user is actively scrolling, disable clover CSS transition (iOS Safari stutter fix)
+let scrollingActiveTimeout;
+
+function setScrollingActive(active) {
+  const isMobile = viewportWidth < 1024;
+  if (!isMobile) return;
+
+  clover.style.transition = active
+    ? 'none'
+    : 'transform 0.30s cubic-bezier(0.4, 0, 0.2, 1)';
+}
 
 function wrapSpecialChars(el) {
   if (!el) return;
