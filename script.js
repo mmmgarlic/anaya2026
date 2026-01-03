@@ -356,9 +356,9 @@ function updateLayout() {
     }
 
     if (viewportWidth < 805) {
-      baseCloverScale *= 0.6;
+      baseCloverScale *= 1.25;
     } else if (viewportWidth < 1024) {
-      baseCloverScale *= 0.85;
+      baseCloverScale *= 1.35;
     }
   } else {
     if (viewportWidth < 805) {
@@ -373,8 +373,23 @@ function updateLayout() {
     }
   }
 
-  const startY = viewportHeight * 0.42;
-  const endY = 40;
+  // Clover Y should track the title, not just viewport height
+let startY;
+
+if (heroTextRect) {
+  // place clover around the vertical center of the title (tweak the 0.55 if needed)
+  startY = heroTextRect.top + heroTextRect.height * 0.55 - 10;
+
+} else {
+  // fallback: adaptive factor for small heights
+  const minH = 520;
+  const maxH = 820;
+  const t = Math.max(0, Math.min(1, (viewportHeight - minH) / (maxH - minH))); // 0..1
+  const factor = 0.38 + (0.45 - 0.38) * t; // 0.38 (short) → 0.45 (tall)
+  startY = viewportHeight * factor;
+}
+
+  const endY = 35;
   const endX = viewportWidth * 0.5;
 
   const cloverY = viewportHeight > 0 ? startY - (startY - endY) * scrollProgress : startY;
