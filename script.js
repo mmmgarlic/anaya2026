@@ -104,7 +104,7 @@ let scrollTextDirectionTimeout;
 function scheduleScrollDirectionReset() {
   clearTimeout(scrollTextDirectionTimeout);
   scrollTextDirectionTimeout = setTimeout(() => {
-    if (scrollBoost < 0.8) {
+    if (scrollBoost < 1.2) {
       scrollingTextDirection = 1;
     } else {
       scheduleScrollDirectionReset();
@@ -169,6 +169,10 @@ function requestLayoutUpdate() {
   if (layoutRaf) return;
   layoutRaf = requestAnimationFrame(() => {
     layoutRaf = null;
+
+    // keep heroTextRect fresh while title is scaling
+    if (mainTitle) heroTextRect = mainTitle.getBoundingClientRect();
+
     updateLayout();
   });
 }
@@ -324,11 +328,9 @@ function handleScroll() {
       const shouldScrollToWork = scrollPosition > 50;
       const targetScroll = shouldScrollToWork ? 100 : 0;
 
-      // Smooth scroll to target
-      container.scrollTo({
-        top: targetScroll,
-        behavior: 'smooth'
-      });
+const isMobile = viewportWidth < 1024;
+container.scrollTo({ top: targetScroll, behavior: isMobile ? 'auto' : 'smooth' });
+
 
       // Reset auto-scrolling flag after animation completes
       setTimeout(() => {
@@ -433,7 +435,7 @@ function updateLayout() {
   const scrollingTextTranslateY = scrollProgress * 80;
 
   // Clover positioning
-  const CLOVER_SIZE = isMobile ? 52 : 96;
+  const CLOVER_SIZE = isMobile ? 48 : 96;
   const MIN_GAP = isMobile ? 12 : 20;
 
   let startX;
@@ -452,9 +454,9 @@ function updateLayout() {
     }
 
 if (viewportWidth < 805) {
-  baseCloverScale *= 1.05;
+  baseCloverScale *= 0.95;
 } else if (viewportWidth < 1024) {
-  baseCloverScale *= 1.10;
+  baseCloverScale *= 0.98;
 }
 
   } else {
@@ -486,12 +488,17 @@ if (heroTextRect) {
   startY = viewportHeight * factor;
 }
 
-  const endY = 35;
-  const endX = viewportWidth * 0.5;
+// If landscape / short height, lift clover a bit
+if (isMobile && viewportHeight < 500) {
+  startY -= 22;
+}
 
-  const cloverY = viewportHeight > 0 ? startY - (startY - endY) * scrollProgress : startY;
-  const cloverX = viewportWidth > 0 ? startX - (startX - endX) * scrollProgress : startX;
-  const finalCloverScale = baseCloverScale * (1 - scrollProgress * 0.35);
+const endY = (isMobile && viewportHeight < 500) ? 24 : 35;
+const endX = viewportWidth * 0.5;
+
+const cloverY = viewportHeight > 0 ? startY - (startY - endY) * scrollProgress : startY;
+const cloverX = viewportWidth > 0 ? startX - (startX - endX) * scrollProgress : startX;
+const finalCloverScale = baseCloverScale * (1 - scrollProgress * 0.35);
 
   // Work content animations
   const workContentOpacity = Math.max(0, Math.min(1, (scrollProgress - 0.1) / 0.5));
