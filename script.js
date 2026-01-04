@@ -349,7 +349,7 @@ function handleScroll() {
       const targetScroll = shouldScrollToWork ? 100 : 0;
 
 const isMobile = viewportWidth < 1024;
-container.scrollTo({ top: targetScroll, behavior: isMobile ? 'auto' : 'smooth' });
+container.scrollTo({ top: targetScroll, behavior: 'smooth' }); 
 
 
       // Reset auto-scrolling flag after animation completes
@@ -508,12 +508,8 @@ if (heroTextRect) {
   startY = viewportHeight * factor;
 }
 
-// If landscape / short height, lift clover a bit
-if (isMobile && viewportHeight < 500) {
-  startY -= 22;
-}
 
-const endY = (isMobile && viewportHeight < 500) ? 24 : 35;
+const endY = 35; 
 const endX = viewportWidth * 0.5;
 
 const cloverY = viewportHeight > 0 ? startY - (startY - endY) * scrollProgress : startY;
