@@ -1,85 +1,109 @@
+<!-- onthegroove.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>On The Groove – Anaya's Portfolio</title>
-    <link rel="stylesheet" href="onthegroove-style.css" />
-  <link rel="icon" type="image/png" href="https://cdn.glitch.global/d9e3876a-64dc-4a54-975f-de792dc80655/star%20logo%20png.png?v=1741092532454">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>On The Groove — Anaya.Wiki</title>
+
+  <!-- shared ui styles -->
+  <link rel="stylesheet" href="../styles.css" />
+  <!-- project styles -->
+  <link rel="stylesheet" href="onthegroove-style.css" />
 </head>
-<body>
 
-    <div class="nav-gradient top"></div>
-    <div class="nav-gradient bottom"></div>
+<body class="project-page">
+  <div id="container" class="container">
 
-    
-    <header>
-        <div class="corner top-left"><a href="index.html">← anaya ✷</a></div>
-
-    </header>
-
-
-    <div class="project-content">
-
-        <div class="video-container">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-02-17%20at%2011.32.02%20AM.png?v=1740941846031" alt="On The Groove" class="background-image">
-
-            <div class="project-text">
-                <h2 class="project-subtitle">
-                    <strong>CREATED:</strong> NOV 2024<br>
-                </h2>
-
-                <p class="project-label project-title-label">PROJECT TITLE:</p> 
-                <h1 class="project-title">On The Groove</h1>
-
-                <div class="project-categories categories">
-                    <span class="category">CREATIVE CODE</span>
-                    <span class="category">WEB DESIGN</span>
-                    <span class="category">BRANDING & MARKETING DESIGN</span>
-                </div>
-            </div>
-
-            <p class="project-description">
-                On The Groove is a speculative campaign by Spotify, in partnership with TFL, designed to connect London Underground commuters through music.<br><br>Through ‘tapping into’ NFC stations, commuters can share their Recently Played tracks, explore ‘Music Maps’ of different tube lines, and listen to random songs chosen by fellow passengers.
-            </p>
-        </div>
-
-
-        <div class="image-wrapper placeholder-color-1">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.40.27%20PM.png?v=1740940887279" alt="Image 1" class="main-image">
-            <div class="video-wrapper">
-                <div class="video-block">
-                    <video class="extra-video" src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/updated%20northern%20line.mov?v=1740941070879" autoplay muted loop playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
-                </div>
-                <div class="video-block">
-                    <video class="extra-video" src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/victoria%20line%20video.mov?v=1740941073224" autoplay muted loop playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
-                </div>
-            </div>
-        </div>
-
-        <div class="image-wrapper placeholder-color-2">
-            <div class="content-wrapper">
-                <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.40.41%20PM.png?v=1740940889045" alt="Image 2" class="main-image padded-image">
-                <div class="side-video-wrapper">
-                    <video class="side-video" src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/ezgif-4766c62e2a7eca.mov?v=1740944073796" controls autoplay muted loop playsinline></video>
-                    <p class="unmute-prompt">↑ Unmute me! (-: &nbsp; &nbsp; &nbsp;</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="image-wrapper placeholder-color-3">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.23.45%20PM.png?v=1740940882883" alt="Image 3" class="main-image">
-        </div>
-
-        <div class="image-wrapper placeholder-color-4">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.23.56%20PM.png?v=1740940885781" alt="Image 4" class="main-image">
-        </div>
-
-        <div class="image-wrapper placeholder-color-5">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.24.05%20PM.png?v=1740940882459" alt="Image 5" class="main-image">
-        </div>
+    <!-- clover -->
+    <div id="clover" class="clover">
+      <div class="clover-logo">
+        <img src="../clover-stalk.png" alt="" class="clover-stalk">
+        <img id="cloverLeaves" src="../clover-leaves.png" alt="" class="clover-leaves">
+      </div>
     </div>
-  <script src="script.js"></script>
-  <script src="cursor.js"></script>
+
+    <!-- prev/next arrows -->
+    <div class="project-arrows">
+      <button id="prevProject" class="project-arrow" aria-label="previous project">←</button>
+      <button id="nextProject" class="project-arrow" aria-label="next project">→</button>
+    </div>
+
+    <div id="headerGradient" class="header-gradient" style="opacity:0.95;"></div>
+
+<!-- bottom nav -->
+<div class="navigation-overlay">
+  <div class="navigation-content">
+    <a href="../info.html" class="nav-link">info</a>
+    <a href="mailto:anaya.maheshwari@gmail.com" class="nav-link">contact</a>
+  </div>
+</div>
+
+
+    <!-- page -->
+    <div class="project-page-content">
+
+      <div class="video-container">
+        <img src="../images/onthegroove/otgbg.png" alt="On The Groove">
+
+        <div class="project-text">
+          <h2 class="project-subtitle">
+            <strong>CREATED:</strong> NOV 2024<br>
+          </h2>
+
+          <p class="project-label project-title-label">PROJECT TITLE:</p>
+          <h1 class="project-title">On The Groove</h1>
+
+          <div class="project-categories categories">
+            <span class="category">CREATIVE CODE</span>
+            <span class="category">WEB DESIGN</span>
+            <span class="category">BRANDING & MARKETING DESIGN</span>
+          </div>
+        </div>
+
+        <p class="project-description">
+          On The Groove is a speculative campaign by Spotify, in partnership with TFL, designed to connect London Underground commuters through music.<br><br>
+          Through ‘tapping into’ NFC stations, commuters can share their Recently Played tracks, explore ‘Music Maps’ of different tube lines, and listen to random songs chosen by fellow passengers.
+        </p>
+      </div>
+
+      <div class="image-wrapper placeholder-color-1">
+        <img src="../images/onthegroove/otgmusicmaps.png" alt="">
+        <div class="video-wrapper">
+          <div class="video-block">
+            <video class="extra-video" src="../images/onthegroove/northernline.mov" autoplay muted loop playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
+          </div>
+          <div class="video-block">
+            <video class="extra-video" src="../images/onthegroove/victorialine.mov" autoplay muted loop playsinline disablepictureinpicture controlslist="nodownload noplaybackrate"></video>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-wrapper placeholder-color-2">
+        <div class="content-wrapper">
+          <img src="../images/onthegroove/otginterface.png" alt="" class="main-image padded-image">
+          <div class="side-video-wrapper">
+            <video class="side-video" src="../images/onthegroove/interface.mov" controls autoplay muted loop playsinline></video>
+            <p class="unmute-prompt">↑ Unmute me! (-: &nbsp; &nbsp; &nbsp;</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="image-wrapper placeholder-color-3">
+        <img src="../images/onthegroove/otgresearch.png" alt="">
+      </div>
+
+      <div class="image-wrapper placeholder-color-4">
+        <img src="../images/onthegroove/otgposters.png" alt="">
+      </div>
+
+      <div class="image-wrapper placeholder-color-5">
+        <img src="../images/onthegroove/otgfinally.png" alt="">
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../shared.js"></script>
 </body>
 </html>

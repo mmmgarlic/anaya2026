@@ -1,278 +1,311 @@
+/* sf pro (project content font) */
 @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501') format('opentype');
-    font-weight: 300;
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501")
+    format("opentype");
+  font-weight: 300;
+  font-style: normal;
 }
-
 @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122') format('opentype');
-    font-weight: 400;
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122")
+    format("opentype");
+  font-weight: 400;
+  font-style: normal;
 }
-
 @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516') format('opentype');
-    font-weight: 500;
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516")
+    format("opentype");
+  font-weight: 500;
+  font-style: normal;
 }
-
 @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227') format('opentype');
-    font-weight: 600;
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227")
+    format("opentype");
+  font-weight: 600;
+  font-style: normal;
 }
-
 @font-face {
-    font-family: 'SF Pro Display';
-    src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538') format('opentype');
-    font-weight: 700;
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538")
+    format("opentype");
+  font-weight: 700;
+  font-style: normal;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* base */
+body.project-page {
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display", sans-serif;
 }
 
-body {
-    background: black;
-    color: yellow;
-    font-family: 'SF Pro Display', sans-serif;
-    overflow-x: hidden;
-    width: 100vw;
+/* my project pages also have a .project-content class on the homepage,
+   so on project pages i use .project-page-content to avoid inherited padding */
+body.project-page .project-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #000;
 }
 
-body, a {
-    cursor: none;
+/* keep everything full-bleed + on black */
+body.project-page .video-container,
+body.project-page .image-wrapper,
+body.project-page .image-wrapper-extra,
+body.project-page .black-rectangle {
+  width: 100%;
+  max-width: 100%;
+  background: #000;
 }
 
-.nav-gradient {
-    position: fixed;
-    width: 100%;
-    height: 80px;
-    z-index: 5;
-    pointer-events: none;
-}
-
-.nav-gradient.top {
-    top: 0;
-    background: linear-gradient(to bottom, rgba(26, 26, 26, 1) 0%, rgba(26, 26, 26, 0.15) 75%, rgba(26, 26, 26, 0) 100%);
-}
-
-.nav-gradient.bottom {
-    bottom: 0;
-    background: linear-gradient(to top, rgba(26, 26, 26, 1) 0%, rgba(26, 26, 26, 0.15) 75%, rgba(26, 26, 26, 0) 100%);
-}
-
-header {
-    position: fixed;
-    width: 100%;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.corner {
-    position: fixed;
-    font-size: 1.5rem;
-    pointer-events: auto;
-}
-
-.top-left { top: 20px; left: 20px; }
-.top-right { top: 20px; right: 20px; }
-.bottom-left { bottom: 20px; left: 20px; }
-.bottom-right { bottom: 20px; right: 20px; }
-
-a {
-    text-decoration: underline;
-    color: blue;
-}
-
-a:hover {
-    color: yellow;
-    text-decoration: none;
-}
-
-#custom-cursor {
-    position: fixed;
-    width: 50px;
-    height: 50px;
-    background: transparent;
-    color: rgb(0, 0, 255);
-    font-size: 50px;
-    pointer-events: none;
-    z-index: 1000;
-    transform: translate(-50%, -50%);
-}
-
-#custom-cursor.emoji {
-    width: 35px;
-    height: 35px;
-    font-size: 35px;
-    transform: translate(-50%, -50%);
-}
-
-.project-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    margin-top: .05vw;
-    margin-bottom: 0;
-}
-
+/* hero video */
 .video-container {
-    position: relative;
-    width: 100%;
-    margin-top: 0;
+  position: relative;
+  width: 100%;
+  margin: 0;
 }
 
 .video-container video {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+/* hero overlay text */
 .project-text {
-    position: absolute;
-    bottom: 8%;
-    left: 5%;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 8%;
+  left: 5%;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .project-description {
-    position: absolute;
-    bottom: 7.5%;
-    right: 4%;
-    font-size: 1.6vw;
-    line-height: 2vw;
-    max-width: 40vw;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 7.5%;
+  right: 4%;
+  max-width: 40vw;
+  font-size: 1.6vw;
+  line-height: 2vw;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* type */
 .project-label {
-    font-size: 1.1vw;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 0;
+  font-size: 1.1vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .project-title {
-    font-size: 5vw;
-    font-weight: normal;
-    max-width: 90vw;
-    margin-bottom: 1.28vw;
+  font-size: 5vw;
+  font-weight: 400;
+  max-width: 90vw;
+  margin: 0 0 1.28vw 0;
 }
 
 .project-subtitle {
-    font-size: 1.1vw;
-    margin-bottom: 2vw;
-    line-height: 1.6vw;
-    font-weight: bold;
+  font-size: 1.1vw;
+  font-weight: 700;
+  line-height: 1.6vw;
+  margin: 0 0 2vw 0;
 }
 
+/* tags */
 .project-categories {
-    display: flex;
-    gap: 0.6vw;
-    margin-top: 1vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6vw;
+  margin-top: 1vw;
 }
 
 .category {
-    font-size: clamp(0.6vw, 1vw, 1.2vw);
-    font-weight: bold;
-    text-transform: uppercase;
-    border: 0.15vw solid white;
-    padding: 0.4vw 0.8vw;
-    border-radius: 1.5vw;
+  font-size: clamp(10px, 1vw, 16px);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0.15vw solid #fff;
+  padding: 0.4vw 0.8vw;
+  border-radius: 999px;
 }
 
+/* images */
 .image-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  background: #000;
 }
 
 .image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+/* 2-up video strip */
 .image-wrapper-extra {
-    padding: 0;
-    padding-bottom: 2.1vw;
-    display: flex;
-    justify-content: center;
-    gap: 0vw;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
+  display: flex;
+  justify-content: center;
+  gap: 1.5vw;
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  padding: 0 0 3.3vw 0;
 }
+
+.video-block1,
+.video-block2 {
+  position: static;
+}
+
+.video-block1 { width: 49%; }
+.video-block2 { width: 37%; }
 
 .extra-video {
-    width: 100%;
-    height: 100%;
-    display: block;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.video-block1 {
-    width: 49%;
-    position: relative;
-    left: -0.3%;
-}
-
-.video-block2 {
-    width: 37%;
-    position: relative;
-    right: 6%;
-}
-
+/* full film block */
 .black-rectangle {
-    width: 100%;
-    background-color: black;
-    padding: 2vw 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 0;
+  width: 100%;
+  background: #000;
+  padding: 2vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .black-rectangle-content {
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .black-rectangle-content video {
-    width: 80%;
-    border: none;
-    margin: 0 auto;
+  width: 80%;
+  border: none;
+  margin: 0 auto;
 }
 
 .film-details {
-    font-size: 1.2vw;
-    color: white;
-    margin-top: 0.8vw;
-    width: 79%;
-    text-align: left;
-    font-weight: 550;
-    display: inline-block;
-    margin-bottom: 0;
+  width: 79%;
+  margin-top: 0.8vw;
+  margin-bottom: 0;
+  font-size: 1.2vw;
+  font-weight: 550;
+  color: #fff;
+  text-align: left;
+  display: inline-block;
 }
 
 .unmute-prompt {
-    font-size: 1.2vw;
-    color: white;
-    margin-top: -1.35vw;
-    width: 79.5%;
-    text-align: right;
-    display: inline-block;
+  width: 79.5%;
+  margin-top: -1.35vw;
+  font-size: 1.2vw;
+  color: #fff;
+  text-align: right;
+  display: inline-block;
 }
 
-.image-wrapper:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
+/* small hardening for weird 1px gaps */
+body.project-page img,
+body.project-page video {
+  display: block;
+}
+
+/* responsive */
+@media (max-width: 1023px) {
+  .project-description {
+    font-size: 14px;
+    line-height: 18px;
+    max-width: 70vw;
+  }
+
+  .project-label,
+  .project-subtitle {
+    font-size: 12px;
+    line-height: 16px;
+  }
+
+  .project-title {
+    font-size: 44px;
+  }
+
+  .film-details,
+  .unmute-prompt {
+    font-size: 12px;
+    width: 90%;
+  }
+
+  .black-rectangle-content video {
+    width: 95%;
+  }
+
+  .video-block1,
+  .video-block2 {
+    width: 48%;
+  }
+
+  .image-wrapper-extra {
+    gap: 12px;
+    padding-bottom: 18px;
+  }
+}
+
+@media (max-width: 650px) {
+  .project-text {
+    left: 4%;
+    right: 4%;
+    bottom: 10%;
+  }
+
+  .project-description {
+    display: none;
+  }
+
+  .project-title {
+    font-size: 36px;
+  }
+}
+
+/* fixes / overrides (so shared styles.css can't mess with this page) */
+
+/* shared styles.css makes .project-title blue, so force hero title to white */
+body.project-page .project-text .project-title {
+  color: #fff !important;
+}
+
+/* arrows: more space from clover + slightly higher */
+body.project-page .project-arrows {
+  top: 18px;      /* higher than 36px */
+  gap: 80px;      /* bigger spacing between left/right arrow */
+}
+
+/* this adds real breathing room around each arrow (bigger hitbox too) */
+body.project-page .project-arrow {
+  padding: 6px 18px;  /* more padding */
+  line-height: 1;
+  text-decoration: none;
+}
+
+body.project-page .project-arrow:hover {
+  text-decoration: none;
+}
+
+/* top gradient: make it shorter */
+body.project-page .header-gradient::before {
+  height: 92px;
 }

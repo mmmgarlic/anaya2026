@@ -1,68 +1,92 @@
+<!-- sharpcheddar.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharp Cheddar – Anaya's Portfolio</title>
-    <link rel="stylesheet" href="sharpcheddar-style.css" />
-  <link rel="icon" type="image/png" href="https://cdn.glitch.global/d9e3876a-64dc-4a54-975f-de792dc80655/star%20logo%20png.png?v=1741092532454">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Sharp Cheddar — Anaya.Wiki</title>
+
+  <!-- shared ui styles -->
+  <link rel="stylesheet" href="../styles.css" />
+  <!-- project styles -->
+  <link rel="stylesheet" href="sharpcheddar-style.css" />
 </head>
-<body>
-    
-    <div class="nav-gradient top"></div>
-    <div class="nav-gradient bottom"></div>
 
+<body class="project-page">
+  <div id="container" class="container">
 
-    <header>
-        <div class="corner top-left"><a href="index.html">← anaya ✷</a></div>
-
-    </header>
-
-
-    <div class="project-content">
-
-        <div class="video-container">
-            <video src="https://cdn.glitch.global/4f8ad5f1-9be9-4d42-b78c-65d13c005756/sharpcheddar%20reel%201080p.mp4?v=1740521486050" autoplay loop muted playsinline></video>
-
-            <div class="project-text">
-                <h2 class="project-subtitle">
-                    <strong>CREATED:</strong> JAN 2022<br>
-                    <strong>PROJECT BRIEF:</strong> Create a modular typeface & then create something with it!
-                </h2>
-
-                <p class="project-label project-title-label">PROJECT TITLE:</p> 
-                <h1 class="project-title">Sharp Cheddar (Say Cheese!)</h1>
-
-                <div class="project-categories categories">
-                    <span class="category">TYPOGRAPHY</span>
-                    <span class="category">TYPEFACE DESIGN</span>
-                    <span class="category">ANIMATION & MOTION GRAPHICS</span>
-                </div>
-            </div>
-
-            <p class="project-description">
-                Sharp Cheddar is a playful, 70’s cartoon-inspired typeface that was initially designed in electric tape.
-            </p>
-        </div>
-
-        <!-- Image Container -->
-        <div class="image-wrapper placeholder-color-1">
-            <img src="https://cdn.glitch.global/b5b72ff1-8979-4b5e-851a-e04a19049084/Screenshot%202025-03-02%20at%206.22.09%20PM.png?v=1740946161109">
-        </div>
-
-        <!-- Black Rectangle with Video and Text -->
-        <div class="black-rectangle">
-            <div class="black-rectangle-content">
-                <video class="extra-video" src="https://cdn.glitch.me/b5b72ff1-8979-4b5e-851a-e04a19049084/sharp%20cheddar%20say%20cheese.m4v?v=1740946260960" autoplay muted loop playsinline controls controlslist="nodownload noplaybackrate" style="width: 60%; border: 2px solid white;"></video>
-                <p class="unmute-prompt">↑ Unmute me! ✷</p>
-                <div class="description-text">
-                    <p>I animated a title sequence as a type specimen for my typeface, to the song ‘Tank!’ composed by Yoko Kanno.<br><br>
-                    I was inspired by the song’s spy-fantasy feel, as well as by the works of Saul Bass for Hitchcock films like ‘Psycho’.</p>
-                </div>
-            </div>
-        </div>
+    <!-- clover -->
+    <div id="clover" class="clover">
+      <div class="clover-logo">
+        <img src="../clover-stalk.png" alt="" class="clover-stalk">
+        <img id="cloverLeaves" src="../clover-leaves.png" alt="" class="clover-leaves">
+      </div>
     </div>
-    <script src="script.js"></script>
-  <script src="cursor.js"></script>
+
+    <!-- prev/next arrows -->
+    <div class="project-arrows">
+      <button id="prevProject" class="project-arrow" aria-label="previous project">←</button>
+      <button id="nextProject" class="project-arrow" aria-label="next project">→</button>
+    </div>
+
+    <div id="headerGradient" class="header-gradient" style="opacity:0.95;"></div>
+
+<!-- bottom nav -->
+<div class="navigation-overlay">
+  <div class="navigation-content">
+    <a href="../info.html" class="nav-link">info</a>
+    <a href="mailto:anaya.maheshwari@gmail.com" class="nav-link">contact</a>
+  </div>
+</div>
+
+
+    <!-- page -->
+    <div class="project-page-content">
+
+      <div class="video-container">
+        <video src="../images/sharpcheddar/saycheese.mp4" autoplay loop muted playsinline></video>
+
+        <div class="project-text">
+          <h2 class="project-subtitle">
+            <strong>CREATED:</strong> JAN 2022<br>
+            <strong>PROJECT BRIEF:</strong> Create a modular typeface & then create something with it!
+          </h2>
+
+          <p class="project-label project-title-label">PROJECT TITLE:</p>
+          <h1 class="project-title">Sharp Cheddar (Say Cheese!)</h1>
+
+          <div class="project-categories categories">
+            <span class="category">TYPOGRAPHY</span>
+            <span class="category">TYPEFACE DESIGN</span>
+            <span class="category">ANIMATION & MOTION GRAPHICS</span>
+          </div>
+        </div>
+
+        <p class="project-description">
+          Sharp Cheddar is a playful, 70’s cartoon-inspired typeface that was initially designed in electric tape.
+        </p>
+      </div>
+
+      <div class="image-wrapper placeholder-color-1">
+        <img src="../images/sharpcheddar/typesheet.png" alt="">
+      </div>
+
+      <div class="black-rectangle">
+        <div class="black-rectangle-content">
+          <video class="extra-video" src="../images/sharpcheddar/bg.m4v" autoplay muted loop playsinline controls controlslist="nodownload noplaybackrate"></video>
+          <p class="unmute-prompt">↑ Unmute me! ✷</p>
+          <div class="description-text">
+            <p>
+              I animated a title sequence as a type specimen for my typeface, to the song ‘Tank!’ composed by Yoko Kanno.<br><br>
+              I was inspired by the song’s spy-fantasy feel, as well as by the works of Saul Bass for Hitchcock films like ‘Psycho’.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../shared.js"></script>
 </body>
 </html>

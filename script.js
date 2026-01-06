@@ -2,70 +2,85 @@
 const BLUE = '#2A00FF';
 const WHITE = '#FFFFFF';
 
-// Projects data
 const projects = [
   {
     id: 1,
-    title: 'Wayfarer',
+    title: 'Way–farer',
     year: '2025',
     tags: ['Motion Graphics','Video Editing','3D Animation'],
-    description: 'Creating a sleek product advert for Wayfarer, a speculative satellite-powered travel companion.'
+    description: 'Creating a sleek product advert for Wayfarer, a speculative satellite-powered travel companion.',
+    href: 'projects/wayfarer.html',
+    media: { type: 'video', src: 'images/homepage/wayfarer.mp4' }
   },
   {
     id: 2,
     title: 'Sharp Cheddar',
     year: '2025',
     tags: ['Type Design', 'Animation'],
-    description: 'Designing a funky (semi)modular typeface, inspired by 70s cartoons.'
+    description: 'Designing a funky (semi)modular typeface, inspired by 70s cartoons.',
+    href: 'projects/sharpcheddar.html',
+    media: { type: 'video', src: 'images/homepage/sharpcheddar.mp4' }
   },
   {
     id: 3,
     title: 'On The Groove',
     year: '2024',
     tags: ['Campaign Design','Branding & Marketing'],
-    description: 'Conceptualising a speculative Spotify feature + campaign that connects London Underground commuters through music.'
+    description: 'Conceptualising a speculative Spotify feature + campaign that connects London Underground commuters through music.',
+    href: 'projects/onthegroove.html',
+    media: { type: 'image', src: 'images/homepage/otg.png' }
   },
   {
     id: 4,
     title: 'The Ritual',
     year: '2024',
     tags: ['Video Shooting + Editing', 'Set Creation', 'Creative Direction'],
-    description: 'An original 16mm short film, exploring romance and resurrection.'
+    description: 'An original 16mm short film, exploring romance and resurrection.',
+    href: 'projects/theritual.html',
+    media: { type: 'video', src: 'images/homepage/ritual.m4v' }
   },
   {
     id: 5,
     title: 'Back to School with Goodnotes',
     year: '2024',
     tags: ['Illustration', 'Sticker Design', 'Branding + Marketing Design'],
-    description: 'Refreshing and reimagining Goodnotes’ Back-to-School sticker pack, released in-app to 24M+ subscribers.' 
+    description: 'Refreshing and reimagining Goodnotes’ Back-to-School sticker pack, released in-app to 24M+ subscribers.',
+    href: 'projects/goodnotes.html',
+    media: { type: 'image', src: 'images/homepage/goodnotes.png' }
   },
   {
     id: 6,
     title: 'Thirsty Robots',
     year: '2023',
     tags: ['Creative Coding', 'AI Chatbot Creation', 'Experimental'],
-    description: 'Building a series of playful, interactive web experiences that reveal the hidden environmental cost of AI.'
+    description: 'Building a series of playful, interactive web experiences that reveal the hidden environmental cost of AI.',
+    href: 'projects/thirstyrobots.html',
+    media: { type: 'video', src: 'images/homepage/thirstyrobots.mov' }
   },
   {
     id: 7,
     title: 'Archive – Editorial Design',
     year: '2023',
     tags: ['Layouting','Cover Design','Zines + Pamphlets','Publication Design'],
-    description: 'A collection of selected editorial design work.'
+    description: 'A collection of selected editorial design work.',
+    href: null,
+    media: { type: 'image', src: 'images/homepage/editorial.png' }
   },
   {
     id: 8,
     title: 'Archive – Miscellaneous',
     year: '2023',
     tags: ['Random', 'Lol', 'Idk'],
-    description: 'A collection of selected design experiments.'
+    description: 'A collection of selected design experiments.',
+    href: null,
+    media: { type: 'image', src: 'images/homepage/misc.png' }
   }
 ];
 
 // Scrolling text words
 const scrollingWords = [
-  'graphic design',
   'creative code', 
+  'graphic design',
   'branding', 
   'film',
   'game design'
@@ -278,26 +293,45 @@ if (window.visualViewport) {
 
 }
 
-// Render projects
 function renderProjects() {
-  projectsList.innerHTML = projects.map((project, index) => `
-    <div>
-      <div class="project-card">
-        <div class="project-image"></div>
-        <div class="project-content">
-          <div class="project-header">
-            <div class="project-tags">
-              ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
-            </div>
-            <div class="project-year">${project.year}</div>
+  projectsList.innerHTML = projects.map((project, index) => {
+    const mediaHTML = project.media?.type === 'video'
+      ? `
+        <video class="project-media" autoplay loop muted playsinline preload="metadata">
+          <source src="${project.media.src}">
+        </video>
+      `
+      : `
+        <img class="project-media" src="${project.media?.src || ''}" alt="${project.title}">
+      `;
+
+    const wrapperTag = project.href ? 'a' : 'div';
+    const wrapperAttrs = project.href ? `href="${project.href}"` : '';
+    const wrapperClass = `project-link${project.href ? '' : ' is-disabled'}`;
+
+    return `
+      <${wrapperTag} class="${wrapperClass}" ${wrapperAttrs}>
+        <div class="project-card">
+          <div class="project-image">
+            ${mediaHTML}
           </div>
-          <h3 class="project-title">${project.title}</h3>
-          <p class="project-description">${project.description}</p>
+
+          <div class="project-content">
+            <div class="project-header">
+              <div class="project-tags">
+                ${project.tags.map(tag => `<span class="project-tag">${tag}</span>`).join('')}
+              </div>
+              <div class="project-year">${project.year}</div>
+            </div>
+
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+          </div>
         </div>
-      </div>
+      </${wrapperTag}>
       ${index < projects.length - 1 ? '<div class="project-divider"></div>' : ''}
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 function updateViewportDimensions() {

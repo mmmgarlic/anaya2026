@@ -1,257 +1,283 @@
+/* sharpcheddar-style.css */
+
+/* sf pro (project content font) */
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501') format('opentype');
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501")
+    format("opentype");
   font-weight: 300;
+  font-style: normal;
 }
-
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122') format('opentype');
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122")
+    format("opentype");
   font-weight: 400;
+  font-style: normal;
 }
-
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516') format('opentype');
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516")
+    format("opentype");
   font-weight: 500;
+  font-style: normal;
 }
-
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227') format('opentype');
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227")
+    format("opentype");
   font-weight: 600;
+  font-style: normal;
 }
-
 @font-face {
-  font-family: 'SF Pro Display';
-  src: url('https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538') format('opentype');
+  font-family: "SF Pro Display";
+  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538")
+    format("opentype");
   font-weight: 700;
+  font-style: normal;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* base */
+body.project-page {
+  background: #000;
+  color: #fff;
+  font-family: "SF Pro Display", sans-serif;
 }
 
-body {
-    background: black;
-    color: yellow;
-    font-family: 'SF Pro Display', sans-serif;
-    overflow-x: hidden;
-    width: 100vw;
+/* full-bleed wrapper */
+body.project-page .project-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: #000;
 }
 
-    body, a {
-        cursor: none;
-    }
-
-
-.nav-gradient {
-    position: fixed;
-    width: 100%;
-    height: 80px;
-    z-index: 5;
-    pointer-events: none;
+/* keep everything full-bleed + on black */
+body.project-page .video-container,
+body.project-page .image-wrapper,
+body.project-page .black-rectangle {
+  width: 100%;
+  max-width: 100%;
+  background: #000;
 }
 
-.nav-gradient.top {
-    top: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0) 100%);
-}
-
-.nav-gradient.bottom {
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.15) 75%, rgba(0, 0, 0, 0) 100%);
-}
-
-
-header {
-    position: fixed;
-    width: 100%;
-    pointer-events: none;
-    z-index: 10;
-}
-
-.corner {
-    position: fixed;
-    font-size: 1.5rem;
-    pointer-events: auto;
-}
-
-.top-left { top: 20px; left: 20px; }
-.top-right { top: 20px; right: 20px; }
-.bottom-left { bottom: 20px; left: 20px; }
-.bottom-right { bottom: 20px; right: 20px; }
-
-a {
-    text-decoration: underline;
-    color: blue;
-}
-
-a:hover {
-    color: yellow;
-     text-decoration: none;
-}
-
-
-#custom-cursor {
-    position: fixed;
-    width: 50px; 
-    height: 50px;
-    background: transparent;
-    color: rgb(0, 0, 255);
-    font-size: 50px;
-    pointer-events: none; /* Ensure the custom cursor doesn't interfere with interactions */
-    z-index: 1000;
-    transform: translate(-50%, -50%); /* Center the custom cursor */
-}
-
-#custom-cursor.emoji {
-    width: 35px; /* Slightly smaller size for emoji cursors */
-    height: 35px;
-    font-size: 35px;
-    transform: translate(-50%, -50%); /* Center the custom cursor */
-}
-
-/* PROJECT CONTENT */
-.project-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    margin-top: .05vw;
-    margin-bottom: 8vw;
-}
-
-/* VIDEO SECTION */
+/* hero video */
 .video-container {
-    position: relative;
-    width: 100%;
+  position: relative;
+  width: 100%;
+  margin: 0;
 }
 
 .video-container video {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
+/* hero overlay text */
 .project-text {
-    position: absolute;
-    bottom: 23%;
-    left: 5%;
-    color: white;
-    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8); /* Enhanced shadow */
+  position: absolute;
+  left: 5%;
+  bottom: 23%;
+  color: #fff;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
 }
 
-/* "PROJECT TITLE" LABEL */
+.project-description {
+  position: absolute;
+  left: 5%;
+  bottom: 12%;
+  max-width: 40vw;
+  font-size: 1.6vw;
+  line-height: 2vw;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* type */
 .project-label {
-    font-size: 1.1vw; /* Same size as subtitle */
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 0vw; /* Less space between "project title" and "Wayfarer" */
+  font-size: 1.1vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
 }
 
 .project-subtitle {
-    font-size: 1.1vw; /* Reduced from 1.1vw */
-    line-height: 1.4vw;
-    max-width: 40vw; /* Added max-width */
-    margin-bottom: 2vw;
+  font-size: 1.1vw;
+  font-weight: 700;
+  line-height: 1.4vw;
+  max-width: 40vw;
+  margin: 0 0 2vw 0;
 }
 
-/* PROJECT TITLE */
 .project-title {
-    font-size: 5vw;
-    font-weight: normal;
-    max-width: 40vw; /* Added max-width */
-    margin-bottom: 2vw;
-  line-height:5vw;
-  margin-top:.5vw;
+  font-size: 5vw;
+  font-weight: 400;
+  max-width: 40vw;
+  margin: 0 0 2vw 0;
+  line-height: 5vw;
+  margin-top: 0.5vw;
 }
 
-/* PROJECT CATEGORIES */
+/* tags */
 .project-categories {
-    display: flex;
-    gap: 0.6vw; /* Adjust gap dynamically */
-    margin-top: 1.5vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6vw;
+  margin-top: 1.5vw;
 }
 
 .category {
-    font-size: clamp(0.6vw, 1vw, 1.2vw); /* Responsive font size */
-    font-weight: bold;
-    text-transform: uppercase;
-    border: 0.15vw solid white; /* Scales with width */
-    padding: 0.4vw 0.8vw; /* Responsive padding */
-    border-radius: 1.5vw; /* Scales with size */
+  font-size: clamp(10px, 1vw, 16px);
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0.15vw solid #fff;
+  padding: 0.4vw 0.8vw;
+  border-radius: 999px;
 }
 
-/* PROJECT DESCRIPTION */
-.project-description {
-    position: absolute;
-    bottom: 12%;
-    left: 5%;
-    font-size: 1.6vw; /* Increased font size */
-    line-height: 2vw;
-    max-width: 40vw;
-    color: white; /* White text */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Drop shadow */
-}
-
-/* IMAGE WRAPPER */
+/* images */
 .image-wrapper {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+  background: #000;
 }
 
 .image-wrapper img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
-/* BLACK RECTANGLE SECTION */
+/* black rectangle section */
 .black-rectangle {
-    width: 100%;
-    background-color: black;
-    padding: 2vw 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  background: #000;
+  padding: 2vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .black-rectangle-content {
-    width: 90%;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start; /* Changed to flex-start to maintain description position */
-    position: relative; /* For unmute prompt positioning */
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+}
+
+.extra-video {
+  width: 60%;
+  border: 2px solid #fff;
+  display: block;
+  margin-top: 2vw;
 }
 
 .description-text {
-    width: 35%;
-    color: white;
-    padding-left: 2vw;
-    font-size: 1.4vw;
-    line-height: 2vw;
+  width: 35%;
+  color: #fff;
+  padding-left: 2vw;
+  font-size: 1.4vw;
+  line-height: 2vw;
   margin-top: 9.5vw;
 }
 
 .unmute-prompt {
-    position: absolute;
-    right: 46%;
-    bottom: -2.5vw;
-    font-size: 1.2vw;
-    color: white;
-    text-align: right;
-
+  position: absolute;
+  right: 46%;
+  bottom: -2.5vw;
+  font-size: 1.2vw;
+  color: #fff;
+  text-align: right;
 }
 
-/* VIDEO IN BLACK RECTANGLE */
-.extra-video {
-    width: 60%;
-    border: 2px solid white;
-    display: block; /* Added to ensure proper positioning */
-  margin-top: 2vw;
+/* small hardening for weird 1px gaps */
+body.project-page img,
+body.project-page video {
+  display: block;
+}
+
+/* fixes / overrides (so shared styles.css can't mess with this page) */
+body.project-page .project-text .project-title {
+  color: #fff !important;
+}
+
+/* match ritual ui tweaks */
+body.project-page .project-arrows {
+  top: 18px;
+  gap: 80px;
+}
+
+body.project-page .project-arrow {
+  padding: 6px 18px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+body.project-page .project-arrow:hover {
+  text-decoration: none;
+}
+
+body.project-page .header-gradient::before {
+  height: 92px;
+}
+
+/* responsive */
+@media (max-width: 1023px) {
+  .project-subtitle {
+    font-size: 12px;
+    line-height: 16px;
+    max-width: 70vw;
+  }
+
+  .project-title {
+    font-size: 44px;
+    line-height: 44px;
+    max-width: 80vw;
+  }
+
+  .project-description {
+    font-size: 14px;
+    line-height: 18px;
+    max-width: 70vw;
+  }
+
+  .black-rectangle-content {
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+  }
+
+  .extra-video {
+    width: 95%;
+    margin-top: 0;
+  }
+
+  .description-text {
+    width: 95%;
+    padding-left: 0;
+    margin-top: 0;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .unmute-prompt {
+    position: static;
+    align-self: flex-end;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 650px) {
+  .project-description {
+    display: none;
+  }
 }

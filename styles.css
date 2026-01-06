@@ -11,6 +11,28 @@
   font-family: "Times New Roman", Times, serif !important;
 }
 
+.project-link.is-disabled {
+  cursor: default;
+}
+
+.project-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-image {
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.project-media {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* CSS Variables */
 :root {
   --blue: #2A00FF;
@@ -103,6 +125,50 @@ body {
   transform-origin: center center;
   will-change: transform;
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.10));
+}
+
+.project-arrows {
+  position: fixed;
+  top: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  pointer-events: none;
+}
+
+.project-arrow {
+  pointer-events: auto;
+  background: none;
+  border: none;
+  color: var(--blue);
+  font-family: "OfficeTimesRoundMono", monospace;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+}
+
+.project-arrow:hover {
+  text-decoration: none;
+}
+
+.project-arrow.is-disabled {
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+@media (max-width: 1023px) {
+  .project-arrows {
+    top: 22px;
+    gap: 14px;
+  }
+  .project-arrow {
+    font-size: 20px;
+  }
 }
 
 /* Header gradient */
@@ -416,6 +482,11 @@ body {
   margin-bottom: 40px;
 }
 
+.project-content {
+  padding-top: 120px;
+  padding-bottom: 160px;
+}
+
 /* Footer */
 .footer {
   text-align: center;
@@ -566,4 +637,83 @@ body {
   }
 }
 
+/* =========================
+   PROJECT PAGE OVERRIDES
+   ========================= */
+body.project-page {
+  background: #000;
+  overflow: hidden; /* keep scroll inside .container */
+}
 
+/* kill the "100vw includes scrollbar" gap */
+body.project-page .container {
+  width: 100%;
+  max-width: 100%;
+  background: #000;
+  padding-right: 0;           /* remove the 1px scrollbar padding */
+  overflow-x: hidden;
+}
+
+/* some of your project css uses 100vw — override to avoid scrollbar-gap */
+body.project-page .project-content,
+body.project-page .video-container,
+body.project-page .image-wrapper,
+body.project-page .image-wrapper-extra {
+  width: 100%;
+}
+
+/* PROJECT: let JS control transform */
+body.project-page .clover {
+  left: 0 !important;
+  top: 0 !important;
+  /* DON'T override transform */
+}
+
+/* Arrows: sit either side of clover and NO underline */
+body.project-page .project-arrows {
+  top: 36px;
+}
+
+body.project-page .project-arrow {
+  text-decoration: none;
+}
+
+body.project-page .project-arrow:hover {
+  text-decoration: none;
+}
+
+/* =========================
+   PROJECT PAGES (shared UI)
+   ========================= */
+body.project-page {
+  background: #000;
+  overflow: hidden; /* keep scroll inside .container */
+}
+
+body.project-page #container.container {
+  background: #000;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0 !important;
+  overflow-x: clip;
+}
+
+/* UI stays OfficeTimes */
+body.project-page .project-arrows,
+body.project-page .project-arrow,
+body.project-page .navigation-content,
+body.project-page .nav-link {
+  font-family: "OfficeTimesRoundMono", monospace;
+}
+
+/* Arrows: no underline on project pages */
+body.project-page .project-arrow,
+body.project-page .project-arrow:hover {
+  text-decoration: none;
+}
+
+/* Make sure clover transform is controlled by JS */
+body.project-page .clover {
+  left: 0;
+  top: 0;
+}
