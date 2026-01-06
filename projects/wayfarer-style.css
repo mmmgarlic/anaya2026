@@ -1,42 +1,3 @@
-/* wayfarer-style.css */
-
-/* sf pro (project content font) */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501")
-    format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122")
-    format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516")
-    format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227")
-    format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538")
-    format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
-
 /* base */
 * {
   margin: 0;
@@ -168,7 +129,7 @@ body.project-page .image-wrapper-extra {
 
 .unmute-prompt {
   font-size: 0.9vw;
-  color: #000;
+  color: white;
   position: absolute;
   right: 0;
   top: calc(100% + 0.5vw);
@@ -255,19 +216,60 @@ body.project-page .header-gradient::before {
   }
 }
 
-/* kill the annoying right-side gap + any top band weirdness */
-body.project-page #container.container {
-  width: 100%;
-  max-width: 100%;
-  background: #000;
-  padding-right: 0 !important; /* removes the 1px scrollbar padding from shared */
-  overflow-x: clip;            /* stops tiny horizontal bleed */
-}
-
 /* make sure the page wrapper doesn't inherit homepage padding/width */
 body.project-page .project-page-content {
   width: 100%;
   max-width: 100%;
   margin: 0 !important;
   padding: 0 !important;
+}
+
+/* FIX: kill homepage padding that creates the top black band */
+body.project-page .project-page-content .project-content {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* keep your actual page black */
+body.project-page .project-page-content,
+body.project-page .project-page-content * {
+  background-color: transparent;
+}
+
+/* and explicitly paint the scrolling content area black */
+body.project-page .project-page-content {
+  background: #000;
+}
+
+/* Make the scrolling viewport exactly the visual viewport width */
+body.project-page #container.container {
+  width: 100% !important;          /* don't use 100vw */
+  padding-right: 0 !important;     /* remove the global 1px */
+  margin-right: 0 !important;
+  overflow-x: hidden !important;
+  background: #000 !important;     /* if a gutter exists, it's black like the page */
+}
+
+/* Most important: force the “scrollbar gutter” to not reserve space */
+@supports (scrollbar-gutter: stable) {
+  body.project-page #container.container {
+    scrollbar-gutter: auto !important;
+  }
+}
+
+/* Safety: prevent any child from causing a horizontal overflow that reveals gutter */
+body.project-page .project-page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+
+/* Wayfarer: stop styles.css's .project-content rules from affecting this page */
+body.project-page .project-page-content > .project-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  display: block !important;   /* overrides shared flex rules */
 }

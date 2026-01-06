@@ -109,7 +109,7 @@
   const clover = document.getElementById('clover');
   const headerGradient = document.getElementById('headerGradient');
 
-  if (container) container.scrollTop = 100;
+if (container) container.scrollTop = 0;
 
   const applyWorkViewClover = () => {
     if (!clover) return;

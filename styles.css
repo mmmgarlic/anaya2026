@@ -1,10 +1,45 @@
-/* Self-hosted font */
+
 @font-face {
   font-family: "OfficeTimesRoundMono";
   src: url("./fonts/OfficeTimesRoundMono.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SF-Pro-Display-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SF-Pro-Display-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SF-Pro-Display-Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SF-Pro-Display-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("./fonts/SF-Pro-Display-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
 }
 
 .special-char {
@@ -716,4 +751,60 @@ body.project-page .project-arrow:hover {
 body.project-page .clover {
   left: 0;
   top: 0;
+}
+/* =========================
+   COMING SOON (disabled projects)
+   ========================= */
+
+.project-link.is-disabled .project-image {
+  position: relative;
+}
+
+/* make sure the image/video sits underneath the overlays */
+.project-link.is-disabled .project-media {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+/* blue wash overlay */
+.project-link.is-disabled .project-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(42, 0, 255, 0); /* off by default */
+  transition: background 0.25s ease;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* text overlay */
+.project-link.is-disabled .project-image::before {
+  content: 'COMING SOON';
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 28px;
+  letter-spacing: 0.06em;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25); /* helps on bright thumbnails */
+}
+
+/* hover state */
+.project-link.is-disabled:hover .project-image::after {
+  background: rgba(42, 0, 255, 0.35); /* stronger so it reads */
+}
+
+.project-link.is-disabled:hover .project-image::before {
+  opacity: 1;
+}
+
+/* optional: slightly mute the media only (text stays full strength) */
+.project-link.is-disabled:hover .project-media {
+  opacity: 0.85;
 }

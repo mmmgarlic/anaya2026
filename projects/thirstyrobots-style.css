@@ -1,42 +1,3 @@
-/* thirstyrobots-style.css */
-
-/* sf pro (project content font) */
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Light.otf?v=1739296515501")
-    format("opentype");
-  font-weight: 300;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Regular.otf?v=1739296560122")
-    format("opentype");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Medium.otf?v=1739296542516")
-    format("opentype");
-  font-weight: 500;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Semibold.otf?v=1739296570227")
-    format("opentype");
-  font-weight: 600;
-  font-style: normal;
-}
-@font-face {
-  font-family: "SF Pro Display";
-  src: url("https://cdn.glitch.global/69f8f06e-65ba-408a-8b25-1c397c7a86db/SF-Pro-Display-Bold.otf?v=1739296472538")
-    format("opentype");
-  font-weight: 700;
-  font-style: normal;
-}
-
 /* base */
 * {
   margin: 0;
@@ -44,49 +5,117 @@
   box-sizing: border-box;
 }
 
+/* =========================
+   PAGE BASE
+   ========================= */
 body.project-page {
-  background: #000;
+  background: #fff;
   color: #000;
   font-family: "SF Pro Display", sans-serif;
-  overflow: hidden; /* keep scroll inside #container like ritual */
+  overflow: hidden;      /* keep scroll inside #container */
+  overflow-x: hidden;    /* prevent any horizontal bleed */
 }
 
-/* main scroll container comes from shared styles.css */
+/* =========================
+   KILL THE RIGHT GAP/BAR
+   (shared styles.css uses 100vw + 1px padding-right)
+   ========================= */
 body.project-page #container.container {
-  width: 100%;
-  max-width: 100%;
-  padding-right: 0 !important;
-  overflow-x: hidden;
+  width: 100% !important;          /* kill 100vw scrollbar math */
+  max-width: 100% !important;
+  padding-right: 0 !important;     /* remove shared 1px */
+  overflow-x: clip !important;     /* hard stop tiny horizontal overflow */
+  background: #fff !important;
 }
 
-/* page layout */
+/* make sure wrappers aren't adding width */
+body.project-page .project-page-content {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: clip !important;
+}
+
+/* IMPORTANT: your homepage CSS defines .project-content padding — kill it here */
+body.project-page .project-page-content .project-content {
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: clip !important;
+}
+
+/* =========================
+   CONTENT WRAPPER
+   ========================= */
 .project-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0;
-  padding: 0;
+  width: 100%;
 }
 
-/* hero background image section */
+/* =========================
+   HERO BACKGROUND (TOP IMPORTANT)
+   + WHITE FADE AT BOTTOM
+   ========================= */
 .background-image {
   width: 100%;
-  background-size: contain;
-  background-position: center;
+  position: relative; /* needed for gradient overlay */
   background-repeat: no-repeat;
+
+  /* KEEP TOP VISIBLE */
+  background-position: top center;
+
+  /* FULL BLEED + FILL WIDTH */
+  background-size: cover;
+
+  /* spacing like your original */
+  margin-top: 7vw;
   padding-top: 6vw;
   padding-bottom: 4vw;
-  margin-top: 7vw;
+
+  /* ensures the hero has enough height to show the image */
+  min-height: 78vh;
+
+  display: flex;
+  align-items: flex-start;
 }
 
-/* hero text row */
+/* white gradient fade at bottom of hero bg (like your old nav gradient vibe) */
+.background-image::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 160px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.55) 60%,
+    rgba(255,255,255,1) 100%
+  );
+}
+
+/* make sure hero content sits above the gradient overlay */
+.background-image > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   HERO TEXT ROW
+   ========================= */
 .project-text {
   display: flex;
   width: 90%;
   margin-bottom: 2vw;
-  color: #fff;
   justify-content: space-between;
   align-items: flex-start;
+  color: #fff;
 }
 
 .project-text-left {
@@ -95,6 +124,7 @@ body.project-page #container.container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-size: 2vw;
   margin-top: 0.5vw;
 }
 
@@ -111,6 +141,7 @@ body.project-page #container.container {
   font-size: 1.1vw;
   text-transform: uppercase;
   margin-bottom: 0.5vw;
+  color: #fff;
 }
 
 .project-title {
@@ -118,6 +149,7 @@ body.project-page #container.container {
   font-weight: 400;
   max-width: 90vw;
   margin-bottom: 0.5vw;
+  color: #fff;
 }
 
 .project-subtitle {
@@ -125,11 +157,7 @@ body.project-page #container.container {
   margin-bottom: 0.5vw;
   line-height: 1.2vw;
   font-weight: 700;
-}
-
-.project-description {
-  font-size: 1.6vw;
-  line-height: 1.4;
+  color: #fff;
 }
 
 /* tags */
@@ -142,30 +170,38 @@ body.project-page #container.container {
 }
 
 .category {
-  font-size: clamp(10px, 0.8vw, 16px);
+  font-size: clamp(0.5vw, 0.8vw, 1vw);
   text-transform: uppercase;
   border: 0.1vw solid #fff;
   padding: 0.3vw 0.6vw;
   border-radius: 999px;
+  color: #fff;
 }
 
-/* cta button */
+/* ✅ MAKE THE BLURB WHITE (not blue) */
+.project-description {
+  font-size: 1.6vw;
+  line-height: 1.4;
+  color: #fff !important;
+}
+
+/* CTA button */
 .project-button {
   display: block;
   width: fit-content;
   padding: 0.8vw 1.6vw;
-  background: #ff0;
+  background-color: #ff0;
   color: #000;
   font-size: 1.2vw;
   border-radius: 0.8vw;
   text-align: center;
   margin-top: 2vw;
   text-decoration: underline;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .project-button:hover {
-  background: #fff;
+  background-color: #fff;
   color: rgb(0, 0, 255);
   text-decoration: none;
 }
@@ -176,18 +212,20 @@ body.project-page #container.container {
   margin-top: -12vw;
   position: relative;
   z-index: 2;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .rounded-video {
   width: 100%;
   height: auto;
   border-radius: 1vw;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   display: block;
 }
 
-/* section intro */
+/* =========================
+   BODY SECTION (blue text like original)
+   ========================= */
 .centered-bold-text {
   text-align: center;
   font-weight: 500;
@@ -200,9 +238,9 @@ body.project-page #container.container {
 /* 3-up videos */
 .videos-row {
   margin-top: 5vw;
-  width: 90%;
   display: flex;
   justify-content: space-between;
+  width: 90%;
   margin-bottom: 2vw;
 }
 
@@ -249,10 +287,9 @@ body.project-page #container.container {
   display: block;
 }
 
-/* ritual-style shared ui overrides */
-body.project-page .project-text .project-title {
-  color: #fff !important;
-}
+/* =========================
+   SHARED UI TWEAKS
+   ========================= */
 
 /* arrows: match ritual */
 body.project-page .project-arrows {
@@ -260,12 +297,7 @@ body.project-page .project-arrows {
   gap: 80px;
 }
 
-body.project-page .project-arrow {
-  padding: 6px 18px;
-  line-height: 1;
-  text-decoration: none;
-}
-
+body.project-page .project-arrow,
 body.project-page .project-arrow:hover {
   text-decoration: none;
 }
@@ -275,12 +307,19 @@ body.project-page .header-gradient::before {
   height: 92px;
 }
 
-/* mobile */
+/* =========================
+   MOBILE
+   ========================= */
 @media (max-width: 1023px) {
   .background-image {
     margin-top: 90px;
     padding-top: 40px;
     padding-bottom: 28px;
+    min-height: 64vh;
+  }
+
+  .background-image::after {
+    height: 120px;
   }
 
   .project-text {
@@ -341,5 +380,35 @@ body.project-page .header-gradient::before {
 
   .video-subtitle {
     font-size: 12px;
+  }
+}
+
+/* =========================
+   HERO: push top content down
+   ========================= */
+
+/* 1) push BOTH columns down a bit */
+.background-image {
+  padding-top: calc(6vw + 40px) !important; /* was 6vw */
+}
+
+/* 2) stop the hero video from being pulled so high */
+.video-container {
+  margin-top: -3vw !important; /* was -12vw (less negative = lower) */
+}
+
+/* optional: if you want the left text to drop a touch more */
+.project-text-left {
+  margin-top: 3vw !important; /* was 0.5vw */
+}
+
+/* mobile tuning */
+@media (max-width: 1023px) {
+  .background-image {
+    padding-top: 90px !important; /* was 40px */
+  }
+
+  .video-container {
+    margin-top: 0 !important; /* keep it clean on mobile */
   }
 }
