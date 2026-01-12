@@ -1,8 +1,3 @@
-/* styles.css */
-
-/* =========================
-   FONTS
-   ========================= */
 @font-face {
   font-family: "OfficeTimesRoundMono";
   src: url("./fonts/OfficeTimesRoundMono.otf") format("opentype");
@@ -46,17 +41,11 @@
   font-family: "Times New Roman", Times, serif !important;
 }
 
-/* =========================
-   VARIABLES
-   ========================= */
 :root {
   --blue: #2A00FF;
   --white: #FFFFFF;
 }
 
-/* =========================
-   RESET / BASE
-   ========================= */
 * {
   margin: 0;
   padding: 0;
@@ -954,4 +943,58 @@ body.project-page .nav-link {
   body.project-page h1 { font-size: 34px; line-height: 1.1; }
   body.project-page h2 { font-size: 24px; line-height: 1.2; }
   body.project-page h3 { font-size: 20px; line-height: 1.2; }
+}
+
+/* ============================================================
+   AWKWARD LAPTOP WIDTH TWEAK (only this size)
+   - scrolling text was too tiny
+   - add a bit more breathing room in hero
+   ============================================================ */
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .hero-section {
+    /* gives the hero a little more top padding so it doesn’t feel cramped */
+    padding-top: 8vh;
+  }
+
+  .scrolling-text-wrapper {
+    height: 44px; /* more vertical breathing room */
+  }
+
+  .scrolling-text {
+    font-size: 22px; /* was too tiny at this width */
+  }
+
+  .gradient-left,
+  .gradient-right {
+    width: 160px; /* keeps fades looking proportional with bigger text */
+  }
+}
+/* ============================================================
+   HOMEPAGE PROJECTS — DESKTOP SPACING BUMP
+   (title + description + dividers only; tags unchanged)
+   ============================================================ */
+@media (min-width: 1024px) {
+  .project-card {
+    padding-top: 38px;
+    padding-bottom: 38px;
+  }
+
+  .project-title {
+    margin-bottom: 18px;
+  }
+
+  .project-description {
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 0; /* keep it tight before divider */
+  }
+
+  .project-divider {
+    margin: 22px 0;
+  }
+
+  .final-line {
+    margin-top: 26px;
+    margin-bottom: 46px;
+  }
 }
