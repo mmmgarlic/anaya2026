@@ -71,7 +71,6 @@ html, body {
   overflow-x: hidden;
 }
 
-
 body {
   font-family: "OfficeTimesRoundMono", monospace;
   background-color: var(--white);
@@ -437,13 +436,13 @@ body {
   width: min(58vw, 820px);
   aspect-ratio: 16 / 10;
   height: auto;
-
   background-color: #CCCCCC;
   margin-left: 5px;
   overflow: hidden;
   border-radius: 12px;
 }
 
+/* media fills the box */
 .project-media {
   width: 100%;
   height: 100%;
@@ -454,16 +453,14 @@ body {
 .project-content {
   flex: 1;
   min-width: 360px;
-
   padding-right: 20px;
   display: flex;
   flex-direction: column;
 
-  /* was 120 / 160 — this is the main "excess space" culprit */
+  /* keep your desktop spacing behavior */
   padding-top: clamp(24px, 6vw, 90px);
   padding-bottom: clamp(24px, 6vw, 90px);
 }
-
 
 .project-header {
   display: flex;
@@ -518,7 +515,6 @@ body {
   margin: 16px 0;
 }
 
-
 .final-line {
   width: 100%;
   height: 2px;
@@ -570,9 +566,11 @@ body {
 }
 
 /* =========================
-   Mobile Responsive Styles
+   Mobile Responsive Styles (HOMEPAGE)
    ========================= */
 @media (max-width: 1023px) {
+
+  /* nav */
   .navigation-content {
     font-size: 18px;
     padding-left: 24px;
@@ -585,26 +583,12 @@ body {
 
   .work-button {
     font-size: 18px;
-    transition: opacity 0.3s ease, text-decoration 0.3s ease;
   }
 
-  .clover-logo {
-    width: 48px;
-    height: 48px;
-  }
-
-  .clover-stalk {
-    width: 14.3px;
-  }
-
-  .clover-leaves {
-    width: 40px;
-  }
-
-  .clover-placeholder {
-    width: 48px;
-    height: 48px;
-  }
+  .clover-logo { width: 48px; height: 48px; }
+  .clover-stalk { width: 14.3px; }
+  .clover-leaves { width: 40px; }
+  .clover-placeholder { width: 48px; height: 48px; }
 
   .main-title {
     font-size: clamp(34px, 8.6vw, 88px);
@@ -623,67 +607,61 @@ body {
     will-change: transform, opacity;
   }
 
-  .scrolling-text-wrapper {
-    height: 30px;
+  .scrolling-text-wrapper { height: 30px; }
+  .scrolling-text { font-size: 14px; }
+
+  /* restore overlap but keep it tidy */
+  .work-section {
+    margin-top: -20vh;
+    padding-top: 24px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
-  .scrolling-text {
-    font-size: 14px;
+  /* mobile card layout */
+  .project-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;              /* FIX: too much gap under image */
+    padding-top: 16px;
+    padding-bottom: 12px;   /* FIX: too much before divider */
   }
 
-.work-section {
-  /* restore the "projects sit closer to landing" feel */
-  margin-top: -22vh;
-
-  /* override desktop 50px side padding (this was crushing the layout) */
-  padding-left: 18px;
-  padding-right: 18px;
-
-  /* keep a sane top spacing */
-  padding-top: 28px;
-}
-  
-.project-card {
-  flex-direction: column;
-  align-items: stretch;
-  gap: 16px;
-  padding-top: 18px;
-  padding-bottom: 18px;
-}
-
-.project-image {
-  width: 100%;
-  margin-left: 0;
-  border-radius: 12px;
-  overflow: hidden;
-
-  /* wide thumbnail (same vibe as desktop) */
-  aspect-ratio: 16 / 10;
-
-  /* prevent weird sizing bugs */
-  height: auto;
-}
-
-  @supports not (aspect-ratio: 1 / 1) {
+  /* wide thumbnails on mobile */
   .project-image {
-    /* forces 16:10 if aspect-ratio isn't respected */
-    height: calc((100vw - 36px) * 0.625);
-  }
-}
+    width: 100%;
+    margin-left: 0;
+    border-radius: 12px;
+    overflow: hidden;
 
-
-.project-content {
-  min-width: 0;
-  padding: 6px 2px 14px;  /* was 0; this is why it felt cramped */
-}
-
-  .project-header {
-    gap: 10px;
+    aspect-ratio: 16 / 10;  /* FIX: not square */
+    flex-shrink: 0;
   }
 
-   .project-tags {
-    max-width: none;
+  /* critical: make media fill the aspect-ratio box */
+  .project-image .project-media {
+    width: 100% !important;
+    height: 100% !important; /* FIX: prevents square-looking media */
+    object-fit: cover;
+    display: block;
   }
+
+  /* fallback for very old browsers */
+  @supports not (aspect-ratio: 1 / 1) {
+    .project-image {
+      height: calc((100vw - 36px) * 0.625);
+    }
+  }
+
+  /* kill desktop spacing leak on mobile */
+  .project-content {
+    padding: 0 !important;
+    margin: 0 !important;
+    min-width: 0;
+  }
+
+  .project-header { gap: 10px; }
+  .project-tags { max-width: none; }
 
   .project-year {
     font-size: 28px;
@@ -696,13 +674,11 @@ body {
     margin-bottom: 10px;
   }
 
-  .project-description {
-    margin-bottom: 0;
-  }
+  .project-description { margin-bottom: 0; }
 
   .project-divider {
-    margin-top: 14px;
-    margin-bottom: 14px;
+    margin-top: 12px;
+    margin-bottom: 12px;
   }
 
   .final-line {
@@ -710,7 +686,7 @@ body {
     margin-bottom: 26px;
   }
 
-  /* ===== mobile-only "READ MORE ON DESKTOP SITE" for real projects ===== */
+  /* mobile-only overlay */
   .project-link:not(.is-disabled) .project-image {
     position: relative;
   }
@@ -899,21 +875,8 @@ body.project-page .clover {
   opacity: 0.85;
 }
 
-@media (max-width: 1280px) {
-  .project-image {
-    flex: 0 0 min(54vw, 760px);
-    width: min(54vw, 760px);
-  }
-
-  .project-content {
-    min-width: 320px;
-    padding-top: 90px;
-    padding-bottom: 120px;
-  }
-}
-
 /* =========================
-   PROJECT PAGES — Mobile layout
+   Project pages — Mobile layout helpers
    ========================= */
 @media (max-width: 1023px) {
 
