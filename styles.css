@@ -631,37 +631,51 @@ body {
     font-size: 14px;
   }
 
-  .work-section {
-    margin-top: 0;         /* removes the desktop overlap effect */
-    padding-top: 30px;
-  }
+.work-section {
+  /* restore the "projects sit closer to landing" feel */
+  margin-top: -22vh;
+
+  /* override desktop 50px side padding (this was crushing the layout) */
+  padding-left: 18px;
+  padding-right: 18px;
+
+  /* keep a sane top spacing */
+  padding-top: 28px;
+}
   
-  /* ===== mobile project spacing cleanup ===== */
-  .project-card {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 14px;
-  }
+.project-card {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
 
 .project-image {
   width: 100%;
-  max-width: 100%;
   margin-left: 0;
   border-radius: 12px;
   overflow: hidden;
 
-  /* force wide thumbnail */
+  /* wide thumbnail (same vibe as desktop) */
   aspect-ratio: 16 / 10;
-  height: auto !important;
-  min-height: 0 !important;
+
+  /* prevent weird sizing bugs */
+  height: auto;
+}
+
+  @supports not (aspect-ratio: 1 / 1) {
+  .project-image {
+    /* forces 16:10 if aspect-ratio isn't respected */
+    height: calc((100vw - 36px) * 0.625);
+  }
 }
 
 
-  .project-content {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-    min-width: 0;          /* important: prevents overflow */
-  }
+.project-content {
+  min-width: 0;
+  padding: 6px 2px 14px;  /* was 0; this is why it felt cramped */
+}
 
   .project-header {
     gap: 10px;
