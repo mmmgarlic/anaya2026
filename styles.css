@@ -412,7 +412,6 @@ body {
   opacity: 0.001;
 }
 
-/* Project card */
 .project-card {
   display: flex;
   gap: 40px;
@@ -422,10 +421,12 @@ body {
 }
 
 .project-image {
-  width: 800px;
-  height: 500px;
+  flex: 0 0 min(58vw, 820px);
+  width: min(58vw, 820px);
+  aspect-ratio: 16 / 10;
+  height: auto;
+
   background-color: #CCCCCC;
-  flex-shrink: 0;
   margin-left: 5px;
   overflow: hidden;
   border-radius: 12px;
@@ -440,9 +441,12 @@ body {
 
 .project-content {
   flex: 1;
+  min-width: 360px;
+
   padding-right: 20px;
   display: flex;
   flex-direction: column;
+
   padding-top: 120px;
   padding-bottom: 160px;
 }
@@ -868,4 +872,17 @@ body.project-page .clover {
 /* optional: slightly mute the media only (text stays full strength) */
 .project-link.is-disabled:hover .project-media {
   opacity: 0.85;
+}
+
+@media (max-width: 1280px) {
+  .project-image {
+    flex: 0 0 min(54vw, 760px);
+    width: min(54vw, 760px);
+  }
+
+  .project-content {
+    min-width: 320px;
+    padding-top: 90px;
+    padding-bottom: 120px;
+  }
 }
