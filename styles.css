@@ -1,8 +1,6 @@
 /* styles.css */
 
-/* =========================
-   FONTS
-   ========================= */
+/* fonts */
 @font-face {
   font-family: "OfficeTimesRoundMono";
   src: url("./fonts/OfficeTimesRoundMono.otf") format("opentype");
@@ -50,36 +48,30 @@
   font-family: "Times New Roman", Times, serif !important;
 }
 
-/* =========================
-   VARIABLES + RESET
-   ========================= */
+/* vars */
 :root {
   --blue: #2A00FF;
   --white: #FFFFFF;
 }
 
+/* reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Mobile-safe defaults for media */
-img,
-video {
+/* media defaults */
+img, video {
   max-width: 100%;
   height: auto;
 }
 
-/* Prevent horizontal overflow on small screens */
-html,
-body {
+/* stop horizontal scroll */
+html, body {
   overflow-x: hidden;
 }
 
-/* =========================
-   BASE
-   ========================= */
 body {
   font-family: "OfficeTimesRoundMono", monospace;
   background-color: var(--white);
@@ -88,7 +80,7 @@ body {
   padding-right: env(safe-area-inset-right);
 }
 
-/* Container with custom scrollbar */
+/* container */
 .container {
   height: 100vh;
   width: 100vw;
@@ -99,25 +91,13 @@ body {
   padding-right: 1px;
 }
 
-/* Custom scrollbar */
-.container::-webkit-scrollbar {
-  width: 5px;
-}
+/* scrollbar */
+.container::-webkit-scrollbar { width: 5px; }
+.container::-webkit-scrollbar-track { background: rgba(42, 0, 255, 0.1); }
+.container::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 5px; }
+.container::-webkit-scrollbar-thumb:hover { background: rgba(42, 0, 255, 0.8); }
 
-.container::-webkit-scrollbar-track {
-  background: rgba(42, 0, 255, 0.1);
-}
-
-.container::-webkit-scrollbar-thumb {
-  background: var(--blue);
-  border-radius: 5px;
-}
-
-.container::-webkit-scrollbar-thumb:hover {
-  background: rgba(42, 0, 255, 0.8);
-}
-
-/* Links */
+/* links */
 .project-link {
   display: block;
   text-decoration: none;
@@ -128,9 +108,7 @@ body {
   cursor: default;
 }
 
-/* =========================
-   CLOVER
-   ========================= */
+/* clover */
 .clover {
   position: fixed;
   top: 0;
@@ -175,9 +153,7 @@ body {
   filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.10));
 }
 
-/* =========================
-   PROJECT ARROWS (PROJECT PAGES)
-   ========================= */
+/* project arrows (project pages) */
 .project-arrows {
   position: fixed;
   top: 36px;
@@ -203,18 +179,10 @@ body {
   padding: 0;
 }
 
-.project-arrow:hover {
-  text-decoration: none;
-}
+.project-arrow:hover { text-decoration: none; }
+.project-arrow.is-disabled { opacity: 0.25; pointer-events: none; }
 
-.project-arrow.is-disabled {
-  opacity: 0.25;
-  pointer-events: none;
-}
-
-/* =========================
-   HEADER GRADIENT
-   ========================= */
+/* header gradient */
 .header-gradient {
   position: fixed;
   top: 0;
@@ -226,15 +194,13 @@ body {
 }
 
 .header-gradient::before {
-  content: "";
+  content: '';
   display: block;
   height: 140px;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.95) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.95) 50%,
+    rgba(255,255,255,0) 100%);
 }
 
 .header-gradient,
@@ -243,9 +209,7 @@ body {
   right: env(safe-area-inset-right);
 }
 
-/* =========================
-   NAVIGATION OVERLAY
-   ========================= */
+/* nav overlay */
 .navigation-overlay {
   position: fixed;
   padding-left: env(safe-area-inset-left);
@@ -256,12 +220,10 @@ body {
   height: 128px;
   pointer-events: none;
   z-index: 50;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(42, 0, 255, 0.3) 50%,
-    rgba(42, 0, 255, 0.8) 100%
-  );
+  background: linear-gradient(to bottom,
+    rgba(255,255,255,0) 0%,
+    rgba(42,0,255,0.3) 50%,
+    rgba(42,0,255,0.8) 100%);
 }
 
 .navigation-content {
@@ -285,9 +247,7 @@ body {
   transition: all 0.3s ease;
 }
 
-.nav-link:hover {
-  text-decoration: none;
-}
+.nav-link:hover { text-decoration: none; }
 
 .work-button {
   display: flex;
@@ -303,21 +263,11 @@ body {
   transition: opacity 0.3s ease, text-decoration 0.3s ease;
 }
 
-.work-button span:nth-child(2) {
-  text-decoration: underline;
-}
+.work-button span:nth-child(2) { text-decoration: underline; }
+.work-button:hover span:nth-child(2) { text-decoration: none; }
+.work-button:hover { text-decoration: none; }
 
-.work-button:hover span:nth-child(2) {
-  text-decoration: none;
-}
-
-.work-button:hover {
-  text-decoration: none;
-}
-
-/* =========================
-   HERO SECTION
-   ========================= */
+/* hero */
 .hero-section {
   height: 100vh;
   display: flex;
@@ -349,7 +299,7 @@ body {
   letter-spacing: 0.02em;
   white-space: nowrap;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   transform-origin: left center;
   font-weight: 400;
   line-height: 1.05;
@@ -369,14 +319,12 @@ body {
   text-underline-offset: 0.8vw;
 }
 
-/* =========================
-   SCROLLING TEXT
-   ========================= */
+/* scrolling line */
 .scrolling-text-container {
   margin-bottom: 16px;
   max-width: 90vw;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .scrolling-text-wrapper {
@@ -394,11 +342,9 @@ body {
   z-index: 10;
   pointer-events: none;
   width: 120px;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0) 100%);
 }
 
 .gradient-right {
@@ -409,11 +355,9 @@ body {
   z-index: 10;
   pointer-events: none;
   width: 120px;
-  background: linear-gradient(
-    to left,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to left,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0) 100%);
 }
 
 .scrolling-text {
@@ -425,9 +369,7 @@ body {
   will-change: transform;
 }
 
-/* =========================
-   WORK SECTION (HOMEPAGE PROJECTS)
-   ========================= */
+/* work section */
 .work-section {
   position: relative;
   background-color: var(--white);
@@ -445,20 +387,21 @@ body {
   opacity: 0.001;
   margin-bottom: 20px;
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .projects-list {
   transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   opacity: 0.001;
 }
 
+/* projects (desktop defaults) */
 .project-card {
   display: flex;
   gap: 40px;
-  padding-top: 30px;
-  padding-bottom: 30px;
+  padding-top: 34px;
+  padding-bottom: 34px;
   align-items: flex-start;
 }
 
@@ -467,18 +410,15 @@ body {
   width: min(58vw, 820px);
   aspect-ratio: 16 / 10;
   height: auto;
-  background-color: #cccccc;
+  background-color: #CCCCCC;
   margin-left: 5px;
   overflow: hidden;
   border-radius: 12px;
 }
 
-/* IMPORTANT:
-   project thumbnails should fill the aspect-ratio box.
-   global img/video sets height:auto, so force 100% here. */
 .project-media {
   width: 100%;
-  height: 100% !important;
+  height: 100%;
   object-fit: cover;
   display: block;
 }
@@ -489,17 +429,15 @@ body {
   padding-right: 20px;
   display: flex;
   flex-direction: column;
-
-  /* desktop spacing */
-  padding-top: clamp(24px, 6vw, 90px);
-  padding-bottom: clamp(24px, 6vw, 90px);
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .project-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 24px;
+  margin-bottom: 18px;
   gap: 0;
 }
 
@@ -530,7 +468,7 @@ body {
 .project-title {
   color: var(--blue);
   font-size: 36px;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   font-weight: 400;
 }
 
@@ -545,7 +483,7 @@ body {
   height: 2px;
   background-color: var(--blue);
   opacity: 0.3;
-  margin: 16px 0;
+  margin: 18px 0;
 }
 
 .final-line {
@@ -557,7 +495,7 @@ body {
   margin-bottom: 40px;
 }
 
-/* Footer */
+/* footer */
 .footer {
   text-align: center;
   color: var(--blue);
@@ -573,11 +511,9 @@ body {
   transition: all 0.3s ease;
 }
 
-.footer-link:hover {
-  text-decoration: none;
-}
+.footer-link:hover { text-decoration: none; }
 
-/* Bottom gradient */
+/* bottom gradient */
 .bottom-gradient {
   position: fixed;
   bottom: 0;
@@ -589,143 +525,84 @@ body {
 }
 
 .bottom-gradient::before {
-  content: "";
+  content: '';
   display: block;
   height: 40vh;
-  background: linear-gradient(
-    to top,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(255, 255, 255, 0.98) 30%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to top,
+    rgba(255,255,255,1) 0%,
+    rgba(255,255,255,0.98) 30%,
+    rgba(255,255,255,0) 100%);
 }
 
-/* =========================
-   RESPONSIVE: “SMALL LAPTOP WINDOW”
-   Fix: title too small, scrolling line too tiny/too close at that window size
-   ========================= */
-@media (max-width: 1180px) and (min-width: 1024px) {
-  .hero-section {
-    padding-top: 54px; /* add top breathing room */
+/* smaller desktop screens */
+@media (max-width: 1280px) {
+  .project-image {
+    flex: 0 0 min(54vw, 760px);
+    width: min(54vw, 760px);
   }
 
-  .hero-content {
-    margin-bottom: 14px; /* less empty space */
-  }
-
-  .main-title {
-    font-size: clamp(66px, 7.2vw, 88px);
-  }
-
-  /* “just this size” tuning: make scrolling line readable + add a bit of space */
-  .scrolling-text-container {
-    margin-top: 8px;
-    margin-bottom: 18px;
-  }
-
-  .scrolling-text-wrapper {
-    height: 46px;
-  }
-
-  .scrolling-text {
-    font-size: 20px;
+  .project-content {
+    min-width: 320px;
   }
 }
 
-/* Slightly narrower still (often the “ruins the page” point) */
-@media (max-width: 1060px) and (min-width: 1024px) {
-  .hero-content {
-    gap: 22px;
-  }
-
-  .main-title {
-    font-size: clamp(60px, 7vw, 84px);
-  }
-
-  .scrolling-text {
-    font-size: 18px;
-  }
+/* small laptop window tweak (only this range) */
+@media (min-width: 900px) and (max-width: 1200px) {
+  .scrolling-text { font-size: 18px; }
+  .scrolling-text-wrapper { height: 34px; }
+  .hero-content { margin-bottom: 14px; }
+  .scrolling-text-container { margin-bottom: 18px; }
 }
 
-/* =========================
-   Mobile Responsive Styles
-   ========================= */
-@media (max-width: 767px) {
+/* mobile + tablet */
+@media (max-width: 1023px) {
   .navigation-content {
     font-size: 18px;
     padding-left: 24px;
     padding-right: 24px;
   }
 
-  .clover {
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  .clover { transition: transform 0.50s cubic-bezier(0.4, 0, 0.2, 1); }
+  .work-button { font-size: 18px; }
 
-  .work-button {
-    font-size: 18px;
-  }
-
-  .clover-logo {
-    width: 48px;
-    height: 48px;
-  }
-
-  .clover-stalk {
-    width: 14.3px;
-  }
-
-  .clover-leaves {
-    width: 40px;
-  }
-
-  .clover-placeholder {
-    width: 48px;
-    height: 48px;
-  }
+  .clover-logo { width: 48px; height: 48px; }
+  .clover-stalk { width: 14.3px; }
+  .clover-leaves { width: 40px; }
+  .clover-placeholder { width: 48px; height: 48px; }
 
   .main-title {
     font-size: clamp(34px, 8.6vw, 88px);
-    transition-duration: 0.5s;
+    transition-duration: 0.50s;
     will-change: transform, opacity;
   }
 
-  .hero-content {
-    margin-bottom: 12px;
-  }
+  .hero-content { margin-bottom: 10px; }
 
   .scrolling-text-container {
-    margin-top: 2px;
-    margin-bottom: 10px;
-    transition-duration: 0.5s;
+    margin-top: -14px;
+    margin-bottom: 8px;
+    transition-duration: 0.50s;
     will-change: transform, opacity;
   }
 
-  .scrolling-text-wrapper {
-    height: 32px;
-  }
+  .scrolling-text-wrapper { height: 30px; }
+  .scrolling-text { font-size: 14px; }
 
-  .scrolling-text {
-    font-size: 14px;
-  }
-
-  /* Fix the “too much whitespace between landing and projects”:
-     pull work section up a bit, and reduce side padding */
+  /* bringing back the overlap + fixing side padding */
   .work-section {
-    margin-top: -18vh; /* overlap again, but not crazy */
-    padding-top: 22px;
-    padding-left: 16px;
-    padding-right: 16px;
-    padding-bottom: 110px;
+    margin-top: -20vh;
+    padding-top: 24px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
-  /* ===== HOMEPAGE PROJECTS ON MOBILE (the main fixes) ===== */
-
+  /* mobile project layout */
   .project-card {
     flex-direction: column;
     align-items: stretch;
-    gap: 10px; /* reduce the “crazy” gap between image and tags */
-    padding-top: 16px;
-    padding-bottom: 14px;
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
   }
 
   .project-image {
@@ -734,77 +611,48 @@ body {
     margin-left: 0;
     border-radius: 12px;
     overflow: hidden;
-
-    /* keep wide thumbnails (NOT square) */
     aspect-ratio: 16 / 10;
     height: auto;
     flex-shrink: 0;
   }
 
-  /* Fallback if aspect-ratio unsupported */
-  @supports not (aspect-ratio: 1 / 1) {
-    .project-image {
-      height: calc((100vw - 32px) * 0.625); /* (16/10)=1.6 => 1/1.6=0.625 */
-    }
-  }
-
-  /* force media to fill the thumbnail box on mobile too */
+  /* this stops the square thumbnails */
   .project-media {
-    width: 100%;
+    width: 100% !important;
     height: 100% !important;
     object-fit: cover;
     display: block;
   }
 
-  /* THIS is the padding culprit on mobile if desktop clamp leaks in */
   .project-content {
     min-width: 0;
-    padding: 8px 2px 10px !important; /* small padding above tags (like you asked) */
-    margin: 0 !important;
+    padding: 8px 2px 10px;
   }
 
-  .project-header {
-    margin-bottom: 12px; /* reduce gap under tags/year */
-    gap: 10px;
-  }
-
-  .project-tags {
-    max-width: none;
-  }
+  .project-header { gap: 10px; }
+  .project-tags { max-width: none; }
 
   .project-year {
-    font-size: 26px;
+    font-size: 28px;
     padding-right: 0;
-    min-width: 56px;
+    min-width: 60px;
   }
 
   .project-title {
     font-size: 28px;
-    margin-bottom: 8px;
-  }
-
-  .project-description {
-    margin-bottom: 0;
-  }
-
-  /* reduce the “too much padding after description (before divider)” */
-  .project-divider {
-    margin-top: 10px;
     margin-bottom: 10px;
   }
 
-  .final-line {
-    margin-top: 14px;
-    margin-bottom: 26px;
-  }
+  .project-description { margin-bottom: 0; }
 
-  /* ===== mobile-only "READ MORE ON DESKTOP SITE" overlay ===== */
-  .project-link:not(.is-disabled) .project-image {
-    position: relative;
-  }
+  .project-divider { margin: 12px 0; }
+  .final-line { margin-top: 14px; margin-bottom: 26px; }
+
+  /* mobile-only overlay */
+  .project-link:not(.is-disabled) .project-image { position: relative; }
 
   .project-link:not(.is-disabled) .project-image::after {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     background: rgba(42, 0, 255, 0);
@@ -814,7 +662,7 @@ body {
   }
 
   .project-link:not(.is-disabled) .project-image::before {
-    content: "READ MORE ON DESKTOP SITE";
+    content: 'READ MORE ON DESKTOP SITE';
     position: absolute;
     inset: 0;
     display: grid;
@@ -828,41 +676,90 @@ body {
     transition: opacity 0.2s ease;
     pointer-events: none;
     z-index: 3;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.25);
   }
 
-  .project-link.is-mobile-locked .project-image::after {
-    background: rgba(42, 0, 255, 0.45);
-  }
+  .project-link.is-mobile-locked .project-image::after { background: rgba(42, 0, 255, 0.45); }
+  .project-link.is-mobile-locked .project-image::before { opacity: 1; }
 
-  .project-link.is-mobile-locked .project-image::before {
-    opacity: 1;
-  }
+  /* arrows on smaller screens */
+  .project-arrows { top: 22px; gap: 14px; }
+  .project-arrow { font-size: 20px; }
 
-  /* project arrows on smaller screens */
-  .project-arrows {
-    top: 22px;
-    gap: 14px;
-  }
-
-  .project-arrow {
-    font-size: 20px;
+  /* fallback for older safari */
+  @supports not (aspect-ratio: 1 / 1) {
+    .project-image { height: calc((100vw - 36px) * 0.625); }
   }
 }
 
-/* Slight hero tightening for smaller phones */
+/* phones: tiny hero spacing polish */
+@media (max-width: 767px) {
+  .hero-content { margin-bottom: 6px; }
+  .scrolling-text-container { margin-top: -8px; margin-bottom: 6px; }
+}
+
+/* small hero gap tweak */
 @media (max-width: 804px) {
-  .hero-content {
-    gap: 16px;
-  }
+  .hero-content { gap: 16px; }
 }
 
-/* =========================
-   COMING SOON (disabled projects)
-   ========================= */
-.project-link.is-disabled .project-image {
-  position: relative;
+/* project page overrides */
+body.project-page {
+  background: #000;
+  overflow: hidden;
 }
+
+body.project-page .container {
+  width: 100%;
+  max-width: 100%;
+  background: #000;
+  padding-right: 0;
+  overflow-x: hidden;
+}
+
+body.project-page .project-content,
+body.project-page .video-container,
+body.project-page .image-wrapper,
+body.project-page .image-wrapper-extra {
+  width: 100%;
+}
+
+body.project-page .clover {
+  left: 0 !important;
+  top: 0 !important;
+}
+
+body.project-page .project-arrows { top: 36px; }
+body.project-page .project-arrow { text-decoration: none; }
+body.project-page .project-arrow:hover { text-decoration: none; }
+
+body.project-page #container.container {
+  background: #000;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 0 !important;
+  overflow-x: clip;
+}
+
+body.project-page .project-arrows,
+body.project-page .project-arrow,
+body.project-page .navigation-content,
+body.project-page .nav-link {
+  font-family: "OfficeTimesRoundMono", monospace;
+}
+
+body.project-page .project-arrow,
+body.project-page .project-arrow:hover {
+  text-decoration: none;
+}
+
+body.project-page .clover {
+  left: 0;
+  top: 0;
+}
+
+/* coming soon */
+.project-link.is-disabled .project-image { position: relative; }
 
 .project-link.is-disabled .project-media {
   position: relative;
@@ -870,9 +767,8 @@ body {
   display: block;
 }
 
-/* blue wash overlay */
 .project-link.is-disabled .project-image::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   background: rgba(42, 0, 255, 0);
@@ -881,9 +777,8 @@ body {
   z-index: 2;
 }
 
-/* text overlay */
 .project-link.is-disabled .project-image::before {
-  content: "COMING SOON";
+  content: 'COMING SOON';
   position: absolute;
   inset: 0;
   display: grid;
@@ -895,117 +790,15 @@ body {
   transition: opacity 0.25s ease;
   pointer-events: none;
   z-index: 3;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 2px 10px rgba(0,0,0,0.25);
 }
 
-/* hover state */
-.project-link.is-disabled:hover .project-image::after {
-  background: rgba(42, 0, 255, 0.35);
-}
+.project-link.is-disabled:hover .project-image::after { background: rgba(42, 0, 255, 0.35); }
+.project-link.is-disabled:hover .project-image::before { opacity: 1; }
+.project-link.is-disabled:hover .project-media { opacity: 0.85; }
 
-.project-link.is-disabled:hover .project-image::before {
-  opacity: 1;
-}
-
-.project-link.is-disabled:hover .project-media {
-  opacity: 0.85;
-}
-
-/* =========================
-   Slight desktop tightening for medium screens
-   ========================= */
-@media (max-width: 1280px) {
-  .project-image {
-    flex: 0 0 min(54vw, 760px);
-    width: min(54vw, 760px);
-  }
-
-  .project-content {
-    min-width: 320px;
-    padding-top: 90px;
-    padding-bottom: 120px;
-  }
-}
-
-/* =========================
-   PROJECT PAGE OVERRIDES (shared UI)
-   ========================= */
-body.project-page {
-  background: #000;
-  overflow: hidden; /* keep scroll inside .container */
-}
-
-/* kill the "100vw includes scrollbar" gap */
-body.project-page .container {
-  width: 100%;
-  max-width: 100%;
-  background: #000;
-  padding-right: 0;
-  overflow-x: hidden;
-}
-
-/* some of your project css uses 100vw — override to avoid scrollbar-gap */
-body.project-page .project-content,
-body.project-page .video-container,
-body.project-page .image-wrapper,
-body.project-page .image-wrapper-extra {
-  width: 100%;
-}
-
-/* PROJECT: let JS control transform */
-body.project-page .clover {
-  left: 0 !important;
-  top: 0 !important;
-  /* DON'T override transform */
-}
-
-/* Arrows: sit either side of clover and NO underline */
-body.project-page .project-arrows {
-  top: 36px;
-}
-
-body.project-page .project-arrow {
-  text-decoration: none;
-}
-
-body.project-page .project-arrow:hover {
-  text-decoration: none;
-}
-
-/* PROJECT PAGES (shared UI) */
-body.project-page #container.container {
-  background: #000;
-  width: 100%;
-  max-width: 100%;
-  padding-right: 0 !important;
-  overflow-x: clip;
-}
-
-/* UI stays OfficeTimes */
-body.project-page .project-arrows,
-body.project-page .project-arrow,
-body.project-page .navigation-content,
-body.project-page .nav-link {
-  font-family: "OfficeTimesRoundMono", monospace;
-}
-
-/* Arrows: no underline on project pages */
-body.project-page .project-arrow,
-body.project-page .project-arrow:hover {
-  text-decoration: none;
-}
-
-/* Make sure clover transform is controlled by JS */
-body.project-page .clover {
-  left: 0;
-  top: 0;
-}
-
-/* =========================
-   PROJECT PAGES — Mobile layout
-   (keep media height:auto here so project pages don't crop unexpectedly)
-   ========================= */
-@media (max-width: 767px) {
+/* project pages — mobile layout */
+@media (max-width: 1023px) {
   body.project-page .container {
     width: 100%;
     padding: 0 16px;
@@ -1023,7 +816,6 @@ body.project-page .clover {
     max-width: 100% !important;
   }
 
-  /* Prevent fixed desktop sizes from breaking mobile */
   body.project-page img,
   body.project-page video {
     width: 100% !important;
@@ -1048,56 +840,7 @@ body.project-page .clover {
     line-height: 1.6;
   }
 
-  body.project-page h1 {
-    font-size: 34px;
-    line-height: 1.1;
-  }
-
-  body.project-page h2 {
-    font-size: 24px;
-    line-height: 1.2;
-  }
-
-  body.project-page h3 {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-}
-
-/* Tablet / small laptop: keep desktop layout, just tighten it */
-@media (max-width: 1023px) and (min-width: 768px) {
-  .work-section {
-    padding-left: 28px;
-    padding-right: 28px;
-    padding-top: 44px;
-    margin-top: -22vh;
-  }
-
-  .project-card {
-    flex-direction: row;      /* IMPORTANT: don’t stack like phone */
-    gap: 22px;
-    padding-top: 22px;
-    padding-bottom: 22px;
-  }
-
-  .project-image {
-    flex: 0 0 52%;
-    width: 52%;
-    aspect-ratio: 16 / 10;
-    margin-left: 0;
-  }
-
-  .project-content {
-    min-width: 0;            /* prevents overflow + weird squeezing */
-    padding-top: 22px;
-    padding-bottom: 22px;
-    padding-right: 0;
-  }
-
-  .project-title { font-size: 32px; }
-  .project-year { font-size: 28px; }
-  .project-description { font-size: 15px; }
-
-  .scrolling-text { font-size: 18px; }
-  .scrolling-text-container { margin-top: 8px; }
+  body.project-page h1 { font-size: 34px; line-height: 1.1; }
+  body.project-page h2 { font-size: 24px; line-height: 1.2; }
+  body.project-page h3 { font-size: 20px; line-height: 1.2; }
 }
