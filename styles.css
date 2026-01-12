@@ -60,6 +60,18 @@
   box-sizing: border-box;
 }
 
+/* Mobile-safe defaults for media */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevent horizontal overflow on small screens */
+html, body {
+  overflow-x: hidden;
+}
+
+
 body {
   font-family: "OfficeTimesRoundMono", monospace;
   background-color: var(--white);
@@ -618,46 +630,38 @@ body {
   }
 
   .work-section {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-top: 0;         /* removes the desktop overlap effect */
+    padding-top: 30px;
   }
-
+  
   /* ===== mobile project spacing cleanup ===== */
   .project-card {
     flex-direction: column;
-    align-items: center;
-
-    /* tighter */
-    padding-top: 14px;
-    padding-bottom: 14px;
+    align-items: stretch;
     gap: 14px;
   }
 
   .project-image {
     width: 100%;
-    max-width: 600px;
-    height: auto;
-    aspect-ratio: 16/10;
+    max-width: 100%;
     margin-left: 0;
+    border-radius: 12px;
+    aspect-ratio: 16 / 10;
+    height: auto;
   }
 
   .project-content {
-    width: 100%;
-    padding-right: 0;
-
-    /* kill the huge desktop padding */
     padding-top: 0 !important;
     padding-bottom: 0 !important;
+    min-width: 0;          /* important: prevents overflow */
   }
 
   .project-header {
-    gap: 16px;
-    margin-bottom: 12px;
+    gap: 10px;
   }
 
-  .project-tags {
-    max-width: calc(100% - 80px);
-    flex: 1;
+   .project-tags {
+    max-width: none;
   }
 
   .project-year {
@@ -885,4 +889,59 @@ body.project-page .clover {
     padding-top: 90px;
     padding-bottom: 120px;
   }
+}
+
+/* =========================
+   PROJECT PAGES — Mobile layout
+   ========================= */
+@media (max-width: 1023px) {
+
+  body.project-page .container {
+    width: 100%;
+    padding: 0 16px;      /* safe margin */
+    overflow-x: hidden;
+  }
+
+  /* Any “wide” wrappers should just become full width */
+  body.project-page .project-content,
+  body.project-page .video-container,
+  body.project-page .image-wrapper,
+  body.project-page .image-wrapper-extra,
+  body.project-page .text-block,
+  body.project-page .content,
+  body.project-page section {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Prevent fixed desktop sizes from breaking mobile */
+  body.project-page img,
+  body.project-page video {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  /* If you use side-by-side grids on desktop, stack them */
+  body.project-page .row,
+  body.project-page .columns,
+  body.project-page .grid,
+  body.project-page .two-col,
+  body.project-page .layout,
+  body.project-page .content-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px;
+  }
+
+  /* Make text readable */
+  body.project-page p,
+  body.project-page li {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  body.project-page h1 { font-size: 34px; line-height: 1.1; }
+  body.project-page h2 { font-size: 24px; line-height: 1.2; }
+  body.project-page h3 { font-size: 20px; line-height: 1.2; }
 }
