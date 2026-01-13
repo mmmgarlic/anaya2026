@@ -871,12 +871,6 @@ body.project-page .clover {
     height: auto !important;
   }
 
-  .project-image::before {
-    content: "";
-    display: block;
-    padding-top: 62.5%; /* 16:10 */
-  }
-
   .project-media {
     position: absolute;
     inset: 0;
@@ -912,5 +906,75 @@ body.project-page .clover {
   .work-section {
     padding-left: 18px;
     padding-right: 18px;
+  }
+}
+
+/* fix: ratio box was fighting the mobile overlay because both used ::before */
+
+/* always keep project thumbnail visible + wide on mobile + narrow desktop */
+@media (max-width: 1100px) {
+  .project-image {
+    position: relative;
+    width: 100% !important;
+    margin-left: 0 !important;
+    flex: 0 0 auto !important;
+    overflow: hidden;
+    border-radius: 12px;
+
+    /* ignore any aspect-ratio that might square it */
+    aspect-ratio: auto !important;
+    height: auto !important;
+  }
+
+  /* use ::after for the ratio box so ::before can stay as your overlay text */
+  .project-image::after {
+    content: "";
+    display: block;
+    padding-top: 62.5%; /* 16:10 */
+  }
+
+  .project-media {
+    position: absolute;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+  }
+}
+
+/* your overlay currently uses ::before AND ::after — keep overlay but change it to not kill sizing */
+@media (max-width: 1023px) {
+  .project-link:not(.is-disabled) .project-image::before {
+    content: 'READ MORE ON DESKTOP SITE';
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0.06em;
+    text-align: center;
+    padding: 0 18px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    z-index: 3;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  }
+
+  /* overlay wash should be on a real overlay layer, not fighting the ratio box */
+  .project-link:not(.is-disabled) .project-image .overlay-wash {
+    display: none;
+  }
+
+  /* swap the wash overlay to a box-shadow layer using outline (no pseudo needed) */
+  .project-link.is-mobile-locked .project-image {
+    outline: 9999px solid rgba(42,0,255,0.45);
+    outline-offset: -9999px;
+  }
+
+  .project-link.is-mobile-locked .project-image::before {
+    opacity: 1;
   }
 }
