@@ -911,38 +911,6 @@ body.project-page .clover {
 
 /* fix: ratio box was fighting the mobile overlay because both used ::before */
 
-/* always keep project thumbnail visible + wide on mobile + narrow desktop */
-@media (max-width: 1100px) {
-  .project-image {
-    position: relative;
-    width: 100% !important;
-    margin-left: 0 !important;
-    flex: 0 0 auto !important;
-    overflow: hidden;
-    border-radius: 12px;
-
-    /* ignore any aspect-ratio that might square it */
-    aspect-ratio: auto !important;
-    height: auto !important;
-  }
-
-  /* use ::after for the ratio box so ::before can stay as your overlay text */
-  .project-image::after {
-    content: "";
-    display: block;
-    padding-top: 62.5%; /* 16:10 */
-  }
-
-  .project-media {
-    position: absolute;
-    inset: 0;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover;
-    display: block;
-  }
-}
-
 /* your overlay currently uses ::before AND ::after — keep overlay but change it to not kill sizing */
 @media (max-width: 1023px) {
   .project-link:not(.is-disabled) .project-image::before {
@@ -973,6 +941,64 @@ body.project-page .clover {
     outline: 9999px solid rgba(42,0,255,0.45);
     outline-offset: -9999px;
   }
+
+  /* fix thumbnails on mobile + small desktop widths without pseudo-element ratio hacks */
+@media (max-width: 1100px) {
+  .project-card {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  .project-image {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    flex: 0 0 auto !important;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+
+    /* this is the whole point: keep it wide + visible */
+    aspect-ratio: 16 / 10 !important;
+    height: auto !important;
+    background: #ccc;
+  }
+
+  .project-media {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover;
+    display: block;
+  }
+
+  .project-content {
+    min-width: 0;
+    padding: 8px 2px 0 !important;
+    margin: 0 !important;
+  }
+
+  .project-header { margin-bottom: 14px; }
+  .project-title { margin-bottom: 10px; }
+  .project-divider { margin: 12px 0; }
+
+  .work-section {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+/* safari fallback: only if aspect-ratio isn't supported */
+@supports not (aspect-ratio: 1 / 1) {
+  @media (max-width: 1100px) {
+    .project-image {
+      height: calc((100vw - 36px) * 0.625) !important; /* 16:10 */
+    }
+  }
+}
+
 
   .project-link.is-mobile-locked .project-image::before {
     opacity: 1;
