@@ -1,5 +1,4 @@
-<script data-goatcounter="https://anaya.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+
           
 const BLUE = '#2A00FF';
 const WHITE = '#FFFFFF';
